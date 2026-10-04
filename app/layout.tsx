@@ -12,7 +12,7 @@ const display = Bricolage_Grotesque({
 
 const sans = Be_Vietnam_Pro({
   subsets: ['latin', 'vietnamese'],
-  weight: ['400', '500'],
+  weight: ['400', '500', '600'],
   variable: '--font-bevietnam',
   display: 'swap',
 });
@@ -40,7 +40,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: '#FBFBFE',
+  themeColor: '#F6F6FA',
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

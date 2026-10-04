@@ -8,7 +8,7 @@ const W = 400;
 const H = 320;
 const CX = W / 2;
 const CY = 160;
-const R = 88;
+const R = 84;
 const RINGS = [0.25, 0.5, 0.75, 1];
 
 export default function Radar({ axes }: { axes: Axis[] }) {
@@ -70,14 +70,14 @@ export default function Radar({ axes }: { axes: Axis[] }) {
       </g>
 
       {axes.map((axis, i) => {
-        const [x, rawY] = point(i, R + 20);
+        const [x, rawY] = point(i, R + 18);
         const side = Math.abs(x - CX) < 1 ? 'middle' : x > CX ? 'start' : 'end';
         // hai dòng (nhãn + số): đẩy lên ở đỉnh trên, đẩy xuống ở đỉnh dưới
         const y = side === 'middle' ? (rawY < CY ? rawY - 12 : rawY + 8) : rawY - 4;
         return (
-          <text key={axis.label} x={x} y={y} textAnchor={side} fontSize="14" fill="#14131A">
+          <text key={axis.label} x={x} y={y} textAnchor={side} fontSize="16" fill="#14131A">
             {axis.label}
-            <tspan x={x} dy="16" fontSize="12" fill="#4B4A57" style={{ fontFamily: 'var(--font-mono)' }}>
+            <tspan x={x} dy="17" fontSize="13" fill="#4B4A57" style={{ fontFamily: 'var(--font-mono)' }}>
               {axis.value}
             </tspan>
           </text>

@@ -1,7 +1,7 @@
 @import 'tailwindcss';
 
 @theme inline {
-  --color-page: #fbfbfe;
+  --color-page: #f6f6fa;
   --color-ink: #14131a;
   --color-sub: #4b4a57;
   --color-faint: #6b6a77;
@@ -13,6 +13,10 @@
   --font-display: var(--font-bricolage), system-ui, sans-serif;
   --font-sans: var(--font-bevietnam), system-ui, sans-serif;
   --font-mono: 'Courier New', Courier, monospace;
+
+  /* Tầng 2: card thường · Tầng 3: card nổi bật */
+  --shadow-card: 0 1px 2px rgba(20, 19, 26, 0.05), 0 10px 28px -8px rgba(20, 19, 26, 0.1);
+  --shadow-feature: 0 2px 6px rgba(20, 19, 26, 0.06), 0 30px 64px -18px rgba(91, 60, 196, 0.3);
 }
 
 html {
@@ -31,6 +35,11 @@ body {
   letter-spacing: -0.025em;
 }
 
+/* Courier New chỉ dùng cho chữ kỹ thuật không dấu, không in đậm */
+.font-mono {
+  font-weight: 400;
+}
+
 :focus-visible {
   outline: 2px solid #8b5cf6;
   outline-offset: 3px;
@@ -41,7 +50,67 @@ body {
   background-image: linear-gradient(90deg, #38bdf8, #8b5cf6);
 }
 
-/* Hero: một chuỗi fade + rise duy nhất */
+/* ── Elevation ─────────────────────────────────────────── */
+.card {
+  background: #fff;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  border-radius: 1.25rem;
+  box-shadow: var(--shadow-card);
+}
+
+.card-feature {
+  border: 1px solid transparent;
+  border-radius: 1.75rem;
+  background:
+    linear-gradient(#fff, #fff) padding-box,
+    linear-gradient(135deg, #67e8f9, #a78bfa) border-box;
+  box-shadow: var(--shadow-feature);
+}
+
+/* Quầng sáng cực quang quanh card sản phẩm chủ lực */
+.card-glow {
+  box-shadow:
+    var(--shadow-feature),
+    -30px 0 80px -30px rgba(103, 232, 249, 0.6),
+    30px 10px 90px -30px rgba(167, 139, 250, 0.55);
+}
+
+/* ── Spotlight + tilt 3D (chỉ khi có chuột) ───────────── */
+.tilt {
+  position: relative;
+  overflow: hidden;
+}
+
+.tilt > :not(.tilt-spot) {
+  position: relative;
+}
+
+.tilt-spot {
+  position: absolute;
+  left: -210px;
+  top: -210px;
+  width: 420px;
+  height: 420px;
+  border-radius: 50%;
+  background: radial-gradient(closest-side, rgba(139, 92, 246, 0.16), rgba(56, 189, 248, 0.07) 55%, transparent);
+  transform: translate3d(var(--mx, -400px), var(--my, -400px), 0);
+  opacity: 0;
+  transition: opacity 0.3s;
+  pointer-events: none;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .tilt {
+    transform: perspective(900px) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg));
+    transition: transform 0.18s ease-out;
+  }
+
+  .tilt:hover .tilt-spot {
+    opacity: 1;
+  }
+}
+
+/* ── Hero: một chuỗi fade + rise duy nhất ─────────────── */
 @keyframes rise {
   from {
     opacity: 0;
@@ -57,7 +126,18 @@ body {
   animation: rise 0.8s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
-/* Cực quang */
+@keyframes orbit-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.orbit-ring {
+  animation: orbit-spin 70s linear infinite;
+  will-change: transform;
+}
+
+/* ── Cực quang: gradient mềm sẵn, chỉ animate transform ── */
 @keyframes aurora-a {
   from {
     transform: translateX(-5%) skewX(-7deg) scaleY(0.8);
@@ -85,13 +165,18 @@ body {
   }
 }
 
+.aurora-drift {
+  position: absolute;
+  will-change: transform;
+}
+
 .aurora-ribbon {
-  transform-box: fill-box;
-  transform-origin: center;
+  width: 100%;
+  height: 100%;
+  will-change: transform;
   animation-timing-function: ease-in-out;
   animation-iteration-count: infinite;
   animation-direction: alternate;
-  will-change: transform;
 }
 
 .aurora-ribbon-a {
@@ -111,7 +196,55 @@ body {
   animation-delay: -9s;
 }
 
-/* Dải chip công nghệ */
+.aurora-tint {
+  position: absolute;
+  inset: 0;
+  will-change: opacity;
+}
+
+/* ── Timeline ─────────────────────────────────────────── */
+.timeline-dot {
+  background: linear-gradient(135deg, #38bdf8, #8b5cf6);
+  box-shadow:
+    0 0 0 4px var(--color-page),
+    0 0 14px 3px rgba(56, 189, 248, 0.7);
+}
+
+/* ── Logo ─────────────────────────────────────────────── */
+@keyframes logo-draw {
+  from {
+    stroke-dashoffset: 1;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+.logo-draw path,
+.logo-draw ellipse {
+  stroke-dasharray: 1;
+  animation: logo-draw 0.9s cubic-bezier(0.65, 0, 0.35, 1) both;
+}
+
+.logo-draw .logo-orbit {
+  animation-delay: 0.35s;
+}
+
+.logo-draw .logo-chevron path {
+  animation-delay: 0.7s;
+  animation-duration: 0.5s;
+}
+
+.logo-chevron {
+  transition: transform 0.45s cubic-bezier(0.34, 1.8, 0.64, 1);
+}
+
+a:hover .logo-chevron,
+a:focus-visible .logo-chevron {
+  transform: translateY(-2.5px);
+}
+
+/* ── Dải chip công nghệ ───────────────────────────────── */
 @keyframes marquee {
   to {
     transform: translateX(-50%);
@@ -141,8 +274,15 @@ body {
 
   .rise,
   .aurora-ribbon,
-  .marquee-track {
+  .marquee-track,
+  .orbit-ring,
+  .logo-draw path,
+  .logo-draw ellipse {
     animation: none;
+  }
+
+  .tilt {
+    transform: none;
   }
 
   .marquee {

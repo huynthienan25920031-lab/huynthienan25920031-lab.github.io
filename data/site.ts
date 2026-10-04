@@ -7,6 +7,8 @@ export const site = {
   phoneHref: 'tel:0985905443',
   zaloHref: 'https://zalo.me/0985905443',
   email: 'huynhthienan25920031@gmail.com',
+  /** Ảnh chân dung trong hero, nằm ở public/images/. Chưa có file thì hiện placeholder. */
+  avatar: '/images/avatar.jpg',
   year: 2026,
 };
 

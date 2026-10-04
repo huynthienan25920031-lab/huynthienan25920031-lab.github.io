@@ -17,10 +17,19 @@ Toàn bộ nội dung nằm trong `data/`, không cần đụng tới component:
 
 | File | Nội dung |
 | --- | --- |
-| `data/site.ts` | Tên, trạng thái nhận dự án, tagline, số điện thoại, Zalo, email, menu, dải số liệu |
+| `data/site.ts` | Tên, trạng thái nhận dự án, tagline, số điện thoại, Zalo, email, ảnh chân dung, menu, dải số liệu |
 | `data/skills.ts` | 6 trục radar, các nhóm kỹ năng (mức 1–5), danh sách chip công nghệ |
-| `data/projects.ts` | Sản phẩm. `size: 'featured'` là card chủ lực, `'default'` vào lưới 2 cột, `'small'` là card nhỏ |
+| `data/projects.ts` | Sản phẩm: nội dung, đường dẫn ảnh, kiểu khung (`browser` / `phone`) và cỡ ô bento (`featured`, `tall`, `default`, `small`) |
 | `data/experience.ts` | Timeline kinh nghiệm và học vấn (không ghi tên công ty) |
+
+## Ảnh
+
+Thả ảnh vào `public/images/` rồi build lại: `avatar.jpg` cho ảnh chân dung ở hero, `<slug>-1.png` cho từng sản phẩm
+(danh sách tên file ở `public/images/README.md`). File nào chưa có thì trang tự hiện placeholder gradient.
+
+Logo nằm ở `components/Logo.tsx`; favicon `app/icon.svg` và ảnh Open Graph dùng lại cùng các nét đó, sửa logo thì sửa cả ba.
+
+## Công nghệ và SEO
 
 Thêm công nghệ mới: khai báo trong `tech` ở `data/skills.ts`. Icon lấy từ [devicon](https://devicon.dev)
 (`devicon('ten/ten-original')`); công nghệ không có devicon thì dùng icon lucide đã khai báo trong `components/TechChip.tsx`.

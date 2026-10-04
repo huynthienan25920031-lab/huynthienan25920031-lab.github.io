@@ -11,7 +11,7 @@ export default function SkillMeter({ group }: { group: SkillGroup }) {
 
   return (
     <div ref={ref}>
-      <h3 className="font-display text-lg font-semibold">{group.title}</h3>
+      <h3 className="text-lg font-semibold">{group.title}</h3>
       <ul className="mt-3">
         {group.skills.map((skill) => (
           <li
@@ -35,7 +35,7 @@ export default function SkillMeter({ group }: { group: SkillGroup }) {
                 </span>
               ))}
             </span>
-            <span className="w-[4.75rem] shrink-0 text-right font-mono text-xs text-sub">
+            <span className="w-[4.5rem] shrink-0 text-right text-xs text-sub">
               {levelLabels[skill.level - 1]}
             </span>
           </li>

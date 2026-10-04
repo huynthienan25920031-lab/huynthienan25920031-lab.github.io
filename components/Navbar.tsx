@@ -3,11 +3,13 @@
 import { Menu, X } from 'lucide-react';
 import { useEffect, useRef, useState } from 'react';
 import { nav, site } from '@/data/site';
+import Logo from './Logo';
 
 const container = 'mx-auto w-full max-w-6xl px-5 sm:px-8';
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
+  const [pastHero, setPastHero] = useState(false);
   const toggleRef = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
@@ -21,19 +23,32 @@ export default function Navbar() {
     return () => window.removeEventListener('keydown', onKey);
   }, [open]);
 
+  // backdrop-blur chỉ bật sau khi đã cuộn qua hero (đè lên canvas đang chạy thì rất tốn)
+  useEffect(() => {
+    const hero = document.getElementById('hero');
+    if (!hero) return;
+    const observer = new IntersectionObserver(([entry]) => setPastHero(!entry.isIntersecting), {
+      rootMargin: '-56px 0px 0px 0px',
+    });
+    observer.observe(hero);
+    return () => observer.disconnect();
+  }, []);
+
   return (
-    <header className="sticky top-0 z-50 border-b border-hairline bg-white/70 backdrop-blur-md">
+    <header
+      className={`sticky top-0 z-50 border-b border-hairline transition-colors ${
+        pastHero ? 'bg-white/70 backdrop-blur-md' : 'bg-white/85'
+      }`}
+    >
       <nav aria-label="Điều hướng chính" className={`${container} flex h-14 items-center justify-between`}>
         <a
           href="#top"
-          className="flex items-center gap-2.5"
+          className="flex items-center gap-2"
           aria-label={`${site.name}, về đầu trang`}
           onClick={() => setOpen(false)}
         >
-          <span className="font-display grid h-7 w-7 place-items-center rounded-lg bg-ink text-sm font-bold text-white">
-            A
-          </span>
-          <span className="font-display font-semibold">{site.name}</span>
+          <Logo size={30} animated />
+          <span className="font-display text-[17px] font-semibold">{site.name}</span>
         </a>
 
         <ul className="hidden items-center gap-6 text-sm text-sub sm:flex">
