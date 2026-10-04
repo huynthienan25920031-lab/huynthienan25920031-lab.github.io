@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8" />
+<title>Minh họa · Internal HRM</title>
+<link rel="stylesheet" href="mock.css" />
+<style>
+  td, th { text-align: center; padding: 9px 6px; }
+  td:first-child, th:first-child { text-align: left; padding-left: 14px; }
+  .s { display: inline-block; min-width: 54px; padding: 4px 0; border-radius: 8px; font-size: 11px; font-weight: 600; }
+  .sang { background: #cffafe; color: #0e7490; }
+  .chieu { background: #ede9fe; color: #6d28d9; }
+  .ca2 { background: linear-gradient(90deg, #cffafe, #ede9fe); color: #4c1d95; }
+  .nghi { background: #f1f1f6; color: #9a99a8; }
+  .phep { background: #fef3c7; color: #b45309; }
+</style>
+</head>
+<body>
+<div class="app">
+  <aside class="side">
+    <div class="brand"><i></i>HRM nội bộ</div>
+    <div class="nav on">Chấm công</div>
+    <div class="nav">Xếp ca</div>
+    <div class="nav">Nhân viên</div>
+    <div class="nav">Bảng lương</div>
+    <div class="nav">Phân quyền</div>
+    <div class="foot">Vai trò: <b>Quản lý</b><br />Dữ liệu mẫu</div>
+  </aside>
+  <main class="main">
+    <div class="top">
+      <div><h1>Chấm công &amp; ca làm</h1><div class="muted small">Tuần 10 – 16/11 · 6 nhân viên</div></div>
+      <div class="row"><div class="btn ghost">Tuần trước</div><div class="btn accent">Chốt công tuần</div></div>
+    </div>
+    <div class="row" style="gap:12px">
+      <div class="panel pad stat"><b>200 giờ</b><span class="muted small">Tổng công tuần</span></div>
+      <div class="panel pad stat"><b>30 ca</b><span class="muted small">Đã xếp</span></div>
+      <div class="panel pad stat"><b>2</b><span class="muted small">Lần đi trễ</span></div>
+      <div class="panel pad stat"><b>1</b><span class="muted small">Ngày nghỉ phép</span></div>
+    </div>
+    <div class="panel" style="flex:1">
+      <table>
+        <tr><th>Nhân viên</th><th>T2</th><th>T3</th><th>T4</th><th>T5</th><th>T6</th><th>T7</th><th>CN</th><th>Tổng</th></tr>
+        <tr><td><div class="row"><span class="av">VA</span><b>Nguyễn Văn An</b></div></td><td><span class="s ca2">2 ca</span></td><td><span class="s sang">Sáng</span></td><td><span class="s sang">Sáng</span></td><td><span class="s ca2">2 ca</span></td><td><span class="s sang">Sáng</span></td><td><span class="s nghi">Nghỉ</span></td><td><span class="s nghi">Nghỉ</span></td><td><b>40 giờ</b></td></tr>
+        <tr><td><div class="row"><span class="av b">TB</span><b>Trần Thị Bình</b></div></td><td><span class="s chieu">Chiều</span></td><td><span class="s chieu">Chiều</span></td><td><span class="s ca2">2 ca</span></td><td><span class="s chieu">Chiều</span></td><td><span class="s ca2">2 ca</span></td><td><span class="s sang">Sáng</span></td><td><span class="s nghi">Nghỉ</span></td><td><b>40 giờ</b></td></tr>
+        <tr><td><div class="row"><span class="av c">MC</span><b>Lê Minh Châu</b></div></td><td><span class="s sang">Sáng</span></td><td><span class="s ca2">2 ca</span></td><td><span class="s phep">Phép</span></td><td><span class="s sang">Sáng</span></td><td><span class="s sang">Sáng</span></td><td><span class="s chieu">Chiều</span></td><td><span class="s nghi">Nghỉ</span></td><td><b>30 giờ</b></td></tr>
+        <tr><td><div class="row"><span class="av">TD</span><b>Phạm Thu Dung</b></div></td><td><span class="s nghi">Nghỉ</span></td><td><span class="s sang">Sáng</span></td><td><span class="s chieu">Chiều</span></td><td><span class="s ca2">2 ca</span></td><td><span class="s chieu">Chiều</span></td><td><span class="s ca2">2 ca</span></td><td><span class="s nghi">Nghỉ</span></td><td><b>40 giờ</b></td></tr>
+        <tr><td><div class="row"><span class="av b">GH</span><b>Hoàng Gia Huy</b></div></td><td><span class="s chieu">Chiều</span></td><td><span class="s nghi">Nghỉ</span></td><td><span class="s sang">Sáng</span></td><td><span class="s chieu">Chiều</span></td><td><span class="s nghi">Nghỉ</span></td><td><span class="s sang">Sáng</span></td><td><span class="s chieu">Chiều</span></td><td><b>20 giờ</b></td></tr>
+        <tr><td><div class="row"><span class="av c">TL</span><b>Võ Thị Lan</b></div></td><td><span class="s sang">Sáng</span></td><td><span class="s chieu">Chiều</span></td><td><span class="s nghi">Nghỉ</span></td><td><span class="s sang">Sáng</span></td><td><span class="s ca2">2 ca</span></td><td><span class="s nghi">Nghỉ</span></td><td><span class="s sang">Sáng</span></td><td><b>30 giờ</b></td></tr>
+      </table>
+    </div>
+  </main>
+</div>
+</body>
+</html>

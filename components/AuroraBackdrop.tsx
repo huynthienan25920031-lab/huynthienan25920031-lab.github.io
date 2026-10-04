@@ -41,22 +41,26 @@ export default function AuroraBackdrop() {
     if (!root) return;
 
     const groups = [...root.querySelectorAll<HTMLElement>('[data-tint]')];
-    const drifts = [...root.querySelectorAll<HTMLElement>('[data-drift]')].map((el) => ({
+    // cả các dải của lớp nền lẫn dải chính trong hero (AuroraRibbon)
+    const drifts = [...document.querySelectorAll<HTMLElement>('[data-drift]')].map((el) => ({
       el,
       rotate: Number(el.dataset.rotate),
       speed: Number(el.dataset.speed),
       depth: Number(el.dataset.depth),
+      scroll: Number(el.dataset.scroll ?? 0),
     }));
+    const fades = [...document.querySelectorAll<HTMLElement>('[data-fade-scroll]')];
     const sections = [...document.querySelectorAll<HTMLElement>('[data-aurora]')];
     const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-    const cur = { p: 0, intensity: 1, px: 0, py: 0 };
+    const cur = { p: 0, intensity: 1, px: 0, py: 0, sy: 0 };
     const target = { ...cur };
     let raf = 0;
 
     const readScroll = () => {
       const max = document.documentElement.scrollHeight - window.innerHeight;
       target.p = max > 0 ? Math.min(1, Math.max(0, window.scrollY / max)) : 0;
+      target.sy = Math.min(window.scrollY, window.innerHeight * 1.2);
       const middle = window.innerHeight / 2;
       const active = sections.find((section) => {
         const rect = section.getBoundingClientRect();
@@ -66,7 +70,7 @@ export default function AuroraBackdrop() {
     };
 
     const apply = () => {
-      const { p, intensity, px, py } = cur;
+      const { p, intensity, px, py, sy } = cur;
       root.style.opacity = intensity.toFixed(3);
       const weights = [Math.max(0, 1 - 2 * p), 1 - Math.abs(2 * p - 1), Math.max(0, 2 * p - 1)];
       groups.forEach((group, i) => {
@@ -75,17 +79,20 @@ export default function AuroraBackdrop() {
       const travel = window.innerHeight * 0.5;
       for (const drift of drifts) {
         const x = px * drift.depth * POINTER_REACH;
-        const y = py * drift.depth * POINTER_REACH + (p - 0.5) * drift.speed * travel;
+        const y = py * drift.depth * POINTER_REACH + (p - 0.5) * drift.speed * travel + sy * drift.scroll;
         const tilt = drift.rotate + px * drift.depth * 4;
         drift.el.style.transform = `translate3d(${x.toFixed(1)}px, ${y.toFixed(1)}px, 0) rotate(${tilt.toFixed(2)}deg)`;
       }
+      // lớp màu thứ hai của dải chính hiện dần khi cuộn (đổi hue)
+      const fade = Math.min(1, sy / (window.innerHeight * 0.6)).toFixed(3);
+      for (const el of fades) el.style.opacity = fade;
     };
 
     const frame = () => {
       let moving = false;
-      for (const key of ['p', 'intensity', 'px', 'py'] as const) {
+      for (const key of ['p', 'intensity', 'px', 'py', 'sy'] as const) {
         const delta = target[key] - cur[key];
-        if (Math.abs(delta) > 0.0005) {
+        if (Math.abs(delta) > (key === 'sy' ? 0.3 : 0.0005)) {
           cur[key] += delta * 0.08;
           moving = true;
         } else {

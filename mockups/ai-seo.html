@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8" />
+<title>Minh họa · AI SEO Generator</title>
+<link rel="stylesheet" href="mock.css" />
+<style>
+  .wrap { display: grid; grid-template-columns: minmax(0, 1.22fr) minmax(0, 1fr); gap: 14px; flex: 1; min-height: 0; }
+  td, th { padding-left: 10px; padding-right: 4px; font-size: 12px; }
+  .doc h3 { font-size: 16px; font-weight: 700; margin: 10px 0 6px; }
+  .doc p { color: #3d3c49; margin-bottom: 8px; }
+  .doc mark { background: #ede9fe; color: #6d28d9; border-radius: 4px; padding: 0 3px; }
+  .cursor { display: inline-block; width: 2px; height: 14px; background: var(--violet); vertical-align: -2px; }
+</style>
+</head>
+<body>
+<div class="app">
+  <aside class="side">
+    <div class="brand"><i></i>AI SEO</div>
+    <div class="nav">Thu thập dữ liệu</div>
+    <div class="nav on">Từ khóa</div>
+    <div class="nav">Nội dung</div>
+    <div class="nav">Lịch đăng</div>
+    <div class="foot">Chủ đề: <b>áo thun cotton</b><br />Dữ liệu mẫu</div>
+  </aside>
+  <main class="main">
+    <div class="top">
+      <div><h1>Từ khóa semantic</h1><div class="muted small">Đã quét 10 trang đối thủ · 50 từ khóa liên quan</div></div>
+      <div class="row"><div class="btn ghost">Xuất CSV</div><div class="btn accent">✦ Sinh nội dung</div></div>
+    </div>
+    <div class="wrap">
+      <div class="panel">
+        <table>
+          <tr><th>Từ khóa</th><th>Lượt tìm</th><th>Độ khó</th><th>Ý định</th></tr>
+          <tr class="sel"><td><b>áo thun cotton</b></td><td>10.000</td><td><span class="tag t-amber">Vừa</span></td><td><span class="tag t-cyan">Mua hàng</span></td></tr>
+          <tr><td><b>áo thun form rộng</b></td><td>5.000</td><td><span class="tag t-green">Dễ</span></td><td><span class="tag t-cyan">Mua hàng</span></td></tr>
+          <tr><td><b>cách chọn size áo thun</b></td><td>2.000</td><td><span class="tag t-green">Dễ</span></td><td><span class="tag t-violet">Tìm hiểu</span></td></tr>
+          <tr><td><b>áo thun cotton 100%</b></td><td>2.000</td><td><span class="tag t-amber">Vừa</span></td><td><span class="tag t-cyan">Mua hàng</span></td></tr>
+          <tr><td><b>giặt áo thun không giãn</b></td><td>1.000</td><td><span class="tag t-green">Dễ</span></td><td><span class="tag t-violet">Tìm hiểu</span></td></tr>
+          <tr><td><b>áo thun đồng phục</b></td><td>1.000</td><td><span class="tag t-pink">Khó</span></td><td><span class="tag t-blue">So sánh</span></td></tr>
+          <tr><td><b>vải cotton và polyester</b></td><td>500</td><td><span class="tag t-green">Dễ</span></td><td><span class="tag t-blue">So sánh</span></td></tr>
+          <tr><td><b>áo thun basic nam nữ</b></td><td>500</td><td><span class="tag t-amber">Vừa</span></td><td><span class="tag t-cyan">Mua hàng</span></td></tr>
+        </table>
+      </div>
+      <div class="panel pad doc">
+        <div class="row" style="justify-content:space-between"><h2>Nội dung được sinh</h2><span class="tag t-green">Điểm SEO 90/100</span></div>
+        <div class="bar" style="margin:10px 0 2px"><i style="width:90%"></i></div>
+        <h3>Áo thun cotton: cách chọn form và size chuẩn</h3>
+        <p><mark>Áo thun cotton</mark> thấm hút tốt và giữ dáng lâu, nên là lựa chọn mặc hằng ngày. Bài viết này giúp bạn chọn đúng <mark>form rộng</mark> hay form vừa theo vóc dáng.</p>
+        <h3 style="font-size:14px">1. Cách chọn size áo thun</h3>
+        <p>Đo vòng ngực và chiều dài áo, sau đó so với bảng size. Với <mark>cotton 100%</mark>, nên chọn dư 1 size nếu thích mặc thoải mái.</p>
+        <h3 style="font-size:14px">2. Giặt áo thun không giãn</h3>
+        <p>Lộn trái áo, giặt nước lạnh và phơi ngang<span class="cursor"></span></p>
+        <div class="row" style="margin-top:6px"><span class="tag ai">Đang viết · 500 / 1.000 từ</span><span class="tag t-gray">8 / 8 từ khóa</span></div>
+      </div>
+    </div>
+  </main>
+</div>
+</body>
+</html>

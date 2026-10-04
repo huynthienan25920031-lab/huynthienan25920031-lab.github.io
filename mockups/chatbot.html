@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8" />
+<title>Minh họa · Chatbot chăm sóc khách</title>
+<link rel="stylesheet" href="mock.css" />
+<style>
+  body { font-size: 14px; background: #f6f6fa; display: flex; flex-direction: column; }
+  header { background: #fff; border-bottom: 1px solid var(--line); padding: 30px 16px 12px; display: flex; align-items: center; gap: 10px; }
+  header .av { width: 36px; height: 36px; font-size: 13px; }
+  header b { display: block; font-size: 15px; }
+  header span { font-size: 12px; color: #047857; }
+  .chat { flex: 1; padding: 16px 14px; display: flex; flex-direction: column; gap: 10px; overflow: hidden; }
+  .msg { max-width: 80%; padding: 10px 13px; border-radius: 18px; line-height: 1.4; }
+  .me { align-self: flex-end; background: linear-gradient(135deg, #06b6d4, #7c3aed); color: #fff; border-bottom-right-radius: 6px; }
+  .bot, .staff { align-self: flex-start; background: #fff; border: 1px solid var(--line); border-bottom-left-radius: 6px; }
+  .who { font-size: 11px; font-weight: 600; margin: 0 4px -4px; align-self: flex-start; }
+  .who.b { color: #6d28d9; }
+  .who.s { color: #0e7490; }
+  .sys { align-self: center; font-size: 11.5px; font-weight: 600; padding: 5px 12px; border-radius: 99px; background: #fef3c7; color: #b45309; margin: 4px 0; }
+  .time { align-self: center; font-size: 11px; color: #9a99a8; }
+  footer { background: #fff; border-top: 1px solid var(--line); padding: 10px 12px 22px; display: flex; gap: 8px; align-items: center; }
+  footer div { flex: 1; padding: 10px 14px; border-radius: 99px; background: #f1f1f6; color: #9a99a8; }
+  footer i { width: 38px; height: 38px; border-radius: 50%; background: linear-gradient(135deg, #06b6d4, #7c3aed); }
+</style>
+</head>
+<body>
+<header><span class="av">AI</span><div><b>Trợ lý cửa hàng</b><span>● Trực tuyến 24/7</span></div></header>
+<div class="chat">
+  <div class="time">Hôm nay, 20:00</div>
+  <div class="msg me">Shop còn áo thun size M không ạ?</div>
+  <div class="who b">✦ Bot tự trả lời · 4 giây</div>
+  <div class="msg bot">Dạ còn ạ! Áo thun cotton size M còn 10 chiếc, giá 200.000 đ. Anh/chị muốn đặt mấy chiếc ạ?</div>
+  <div class="msg me">Cho mình 2 chiếc, giao trong tuần được không?</div>
+  <div class="who b">✦ Bot tự trả lời · 5 giây</div>
+  <div class="msg bot">Dạ được ạ. Em đã tạo đơn 2 áo size M, tổng 400.000 đ, giao trong 3 ngày.</div>
+  <div class="msg me">Mình muốn đổi địa chỉ của đơn đặt hôm qua.</div>
+  <div class="sys">Đã chuyển cho nhân viên · Bình đang hỗ trợ</div>
+  <div class="who s">Nhân viên · Bình</div>
+  <div class="msg staff">Chào anh/chị, em là Bình. Em đã mở đơn hôm qua, anh/chị gửi giúp em địa chỉ mới nhé.</div>
+</div>
+<footer><div>Nhập tin nhắn…</div><i></i></footer>
+</body>
+</html>

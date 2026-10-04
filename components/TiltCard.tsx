@@ -2,10 +2,17 @@
 
 import { useRef, type PointerEvent, type ReactNode } from 'react';
 
-const MAX_TILT = 4; // độ
+type Props = {
+  className?: string;
+  children: ReactNode;
+  /** Góc nghiêng tối đa (độ). */
+  max?: number;
+  /** false: tự đặt <span className="tilt-spot" /> ở bên trong (khi vệt sáng cần bị cắt theo một khung con). */
+  spot?: boolean;
+};
 
 /** Card có vệt sáng chạy theo con trỏ và nghiêng 3D nhẹ. CSS tự tắt trên thiết bị touch. */
-export default function TiltCard({ className = '', children }: { className?: string; children: ReactNode }) {
+export default function TiltCard({ className = '', children, max = 4, spot = true }: Props) {
   const ref = useRef<HTMLDivElement>(null);
 
   const onMove = (e: PointerEvent<HTMLDivElement>) => {
@@ -16,8 +23,8 @@ export default function TiltCard({ className = '', children }: { className?: str
     const y = e.clientY - rect.top;
     el.style.setProperty('--mx', `${x.toFixed(0)}px`);
     el.style.setProperty('--my', `${y.toFixed(0)}px`);
-    el.style.setProperty('--ry', `${((x / rect.width - 0.5) * 2 * MAX_TILT).toFixed(2)}deg`);
-    el.style.setProperty('--rx', `${(-(y / rect.height - 0.5) * 2 * MAX_TILT).toFixed(2)}deg`);
+    el.style.setProperty('--ry', `${((x / rect.width - 0.5) * 2 * max).toFixed(2)}deg`);
+    el.style.setProperty('--rx', `${(-(y / rect.height - 0.5) * 2 * max).toFixed(2)}deg`);
   };
 
   const onLeave = () => {
@@ -27,7 +34,7 @@ export default function TiltCard({ className = '', children }: { className?: str
 
   return (
     <div ref={ref} className={`tilt ${className}`} onPointerMove={onMove} onPointerLeave={onLeave}>
-      <span aria-hidden="true" className="tilt-spot" />
+      {spot && <span aria-hidden="true" className="tilt-spot" />}
       {children}
     </div>
   );

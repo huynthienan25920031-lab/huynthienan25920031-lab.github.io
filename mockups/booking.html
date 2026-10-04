@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8" />
+<title>Minh họa · Booking đa kênh</title>
+<link rel="stylesheet" href="mock.css" />
+<style>
+  .wrap { display: grid; grid-template-columns: minmax(0, 1fr) 236px; gap: 14px; flex: 1; min-height: 0; }
+  .cal { display: grid; grid-template-columns: 44px repeat(6, 1fr); grid-template-rows: 30px repeat(8, 1fr); height: 100%; }
+  .cal > div { border-right: 1px solid #f1f1f6; border-bottom: 1px solid #f1f1f6; position: relative; }
+  .cal .h { font-size: 11px; font-weight: 600; color: var(--sub); display: grid; place-items: center; border-bottom: 1px solid var(--line); }
+  .cal .t { font-size: 10.5px; color: #9a99a8; padding: 4px 6px; }
+  .ev { position: absolute; inset: 3px 4px; border-radius: 7px; padding: 4px 7px; font-size: 10.5px; font-weight: 600; line-height: 1.25; overflow: hidden; }
+  .ev small { display: block; font-weight: 400; opacity: 0.85; }
+  .zalo { background: #dbeafe; color: #1d4ed8; }
+  .fb { background: #ede9fe; color: #6d28d9; }
+  .web { background: #cffafe; color: #0e7490; }
+  .two { bottom: calc(-100% - 4px); }
+  .tip { border: 1px solid #e3ddff; background: linear-gradient(180deg, #faf8ff, #fff); border-radius: 11px; padding: 10px 11px; font-size: 12px; }
+  .tip b { display: block; margin-bottom: 3px; }
+</style>
+</head>
+<body>
+<div class="app">
+  <aside class="side">
+    <div class="brand"><i></i>Booking</div>
+    <div class="nav on">Lịch tuần</div>
+    <div class="nav">Lịch hẹn</div>
+    <div class="nav">Nhân sự</div>
+    <div class="nav">Kênh kết nối</div>
+    <div class="nav">Báo cáo</div>
+    <div class="foot">3 kênh đang đồng bộ<br />Dữ liệu mẫu</div>
+  </aside>
+  <main class="main">
+    <div class="top">
+      <div><h1>Lịch tuần</h1><div class="muted small">Tuần 10 – 15/11 · 30 lịch hẹn</div></div>
+      <div class="row"><span class="tag t-blue">Zalo · 12</span><span class="tag t-violet">Facebook · 10</span><span class="tag t-cyan">Web · 8</span></div>
+    </div>
+    <div class="wrap">
+      <div class="panel" style="overflow:hidden">
+        <div class="cal">
+          <div class="h"></div><div class="h">Thứ 2</div><div class="h">Thứ 3</div><div class="h">Thứ 4</div><div class="h">Thứ 5</div><div class="h">Thứ 6</div><div class="h">Thứ 7</div>
+          <div class="t">9:00</div><div><div class="ev zalo">Cắt tóc<small>Văn An · Bình</small></div></div><div></div><div><div class="ev web two">Gội + nhuộm<small>Thu Dung · Châu</small></div></div><div></div><div><div class="ev fb">Cắt tóc<small>Gia Huy · Bình</small></div></div><div><div class="ev zalo two">Uốn<small>Thị Lan · Châu</small></div></div>
+          <div class="t">10:00</div><div></div><div><div class="ev fb">Gội đầu<small>Minh Châu · Dũng</small></div></div><div></div><div><div class="ev zalo">Cắt tóc<small>Quốc Minh · Bình</small></div></div><div></div><div></div>
+          <div class="t">11:00</div><div><div class="ev web">Tư vấn<small>Hồng Nhung · Châu</small></div></div><div></div><div></div><div></div><div><div class="ev web two">Nhuộm<small>Thị Bình · Dũng</small></div></div><div></div>
+          <div class="t">12:00</div><div></div><div></div><div></div><div></div><div></div><div></div>
+          <div class="t">13:00</div><div></div><div><div class="ev zalo two">Uốn<small>Thu Dung · Châu</small></div></div><div></div><div><div class="ev fb">Gội đầu<small>Văn An · Dũng</small></div></div><div></div><div><div class="ev web">Cắt tóc<small>Gia Huy · Bình</small></div></div>
+          <div class="t">14:00</div><div><div class="ev fb">Cắt tóc<small>Thị Lan · Bình</small></div></div><div></div><div><div class="ev zalo" style="outline:2px dashed #7c3aed;outline-offset:-2px">Cắt tóc<small>Trùng giờ · Bình</small></div></div><div></div><div></div><div></div>
+          <div class="t">15:00</div><div></div><div></div><div></div><div><div class="ev web">Tư vấn<small>Quốc Minh · Châu</small></div></div><div><div class="ev zalo">Gội đầu<small>Minh Châu · Dũng</small></div></div><div></div>
+          <div class="t">16:00</div><div></div><div><div class="ev web">Cắt tóc<small>Hồng Nhung · Bình</small></div></div><div></div><div></div><div></div><div><div class="ev fb">Nhuộm<small>Thị Bình · Châu</small></div></div>
+        </div>
+      </div>
+      <div class="panel pad" style="display:flex;flex-direction:column;gap:10px">
+        <div class="row" style="justify-content:space-between"><h2>AI gợi ý</h2><span class="tag ai">2 đề xuất</span></div>
+        <div class="tip"><b>Dời lịch trùng giờ</b>Thứ 4 lúc 14:00, Bình có 2 khách. Chuyển 1 lịch sang 15:00.</div>
+        <div class="tip"><b>Chia lại nhân sự</b>Thứ 2: Bình 3 lịch, Dũng 0 lịch. Giao lịch 11:00 cho Dũng.</div>
+        <h2 style="margin-top:4px">Tải theo nhân sự</h2>
+        <div><div class="row small" style="justify-content:space-between"><span>Bình</span><b>12 lịch</b></div><div class="bar"><i style="width:80%"></i></div></div>
+        <div><div class="row small" style="justify-content:space-between"><span>Châu</span><b>10 lịch</b></div><div class="bar"><i style="width:66%"></i></div></div>
+        <div><div class="row small" style="justify-content:space-between"><span>Dũng</span><b>8 lịch</b></div><div class="bar"><i style="width:53%"></i></div></div>
+        <div class="btn accent" style="text-align:center;margin-top:auto">Áp dụng gợi ý</div>
+      </div>
+    </div>
+  </main>
+</div>
+</body>
+</html>

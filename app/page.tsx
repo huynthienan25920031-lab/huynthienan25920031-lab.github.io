@@ -2,9 +2,11 @@ import { ArrowDown, Mail, MessageCircle, Phone } from 'lucide-react';
 import AntigravityField from '@/components/AntigravityField';
 import Aurora from '@/components/Aurora';
 import AuroraBackdrop from '@/components/AuroraBackdrop';
+import AuroraRibbon from '@/components/AuroraRibbon';
 import HeroPortrait from '@/components/HeroPortrait';
 import Navbar from '@/components/Navbar';
 import ProjectCard from '@/components/ProjectCard';
+import QualityGuard from '@/components/QualityGuard';
 import Radar from '@/components/Radar';
 import SkillMeter from '@/components/SkillMeter';
 import TechChip from '@/components/TechChip';
@@ -30,6 +32,7 @@ export default function Home() {
 
   return (
     <>
+      <QualityGuard />
       <AuroraBackdrop />
       <Navbar />
 
@@ -39,19 +42,21 @@ export default function Home() {
           data-aurora="1"
           className="relative isolate flex min-h-[90vh] items-center overflow-hidden"
         >
+          <AuroraRibbon />
           <AntigravityField className="absolute inset-0 -z-10 h-full w-full" />
           <div
-            className={`${container} grid items-center gap-10 pb-24 pt-14 md:grid-cols-[minmax(0,1fr)_auto] md:gap-12 md:py-24 lg:gap-20`}
+            className={`${container} grid items-center gap-10 pb-24 pt-12 md:grid-cols-[minmax(0,1fr)_auto] md:gap-12 md:py-24 lg:gap-16`}
           >
-            <div className="rise md:order-2 md:mr-4 lg:mr-10" style={rise(2)}>
+            <div className="rise ml-3 md:order-2 md:ml-0" style={rise(2)}>
               <HeroPortrait
                 src={site.avatar}
                 alt={`Chân dung ${site.fullName}`}
                 hasImage={publicFileExists(site.avatar)}
-                className="w-32 md:w-52 lg:w-[clamp(260px,23vw,310px)]"
+                badge={site.role}
+                className="w-44 md:w-64 lg:w-[380px]"
               />
             </div>
-            <div>
+            <div data-particle-quiet="">
               <p
                 className="rise inline-flex items-center gap-2 rounded-full border border-hairline bg-white/85 px-3 py-1.5 text-[13px] text-sub"
                 style={rise(0)}
@@ -81,7 +86,7 @@ export default function Home() {
           </div>
         </section>
 
-        <section aria-label="Số liệu nổi bật" className={`${container} relative z-10 -mt-12`}>
+        <section aria-label="Số liệu nổi bật" className={`${container} pt-6`}>
           <dl className="card grid grid-cols-2 overflow-hidden md:grid-cols-4">
             {stats.map((stat, i) => (
               <div

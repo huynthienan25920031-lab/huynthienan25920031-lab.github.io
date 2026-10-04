@@ -1,0 +1,70 @@
+/* Giao diện minh họa cho portfolio: dữ liệu mẫu, không phải ảnh chụp sản phẩm thật. */
+@import url('https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&display=swap');
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { width: 100%; height: 100%; overflow: hidden; }
+body {
+  font: 400 13px/1.45 'Be Vietnam Pro', system-ui, sans-serif;
+  color: #14131a;
+  background: #f6f6fa;
+  -webkit-font-smoothing: antialiased;
+}
+:root { --line: #e9e9f0; --sub: #5b5a68; --cyan: #06b6d4; --violet: #7c3aed; --soft: #f3f2fb; }
+
+/* ── App shell ── */
+.app { display: grid; grid-template-columns: 172px 1fr; height: 100%; }
+.side { background: #fff; border-right: 1px solid var(--line); padding: 18px 12px; display: flex; flex-direction: column; gap: 4px; }
+.brand { display: flex; align-items: center; gap: 8px; font-weight: 700; font-size: 15px; padding: 0 8px 14px; }
+.brand i { width: 22px; height: 22px; border-radius: 7px; background: linear-gradient(135deg, #22d3ee, #8b5cf6); }
+.nav { padding: 8px 10px; border-radius: 9px; color: var(--sub); font-weight: 500; display: flex; align-items: center; gap: 9px; }
+.nav::before { content: ''; width: 7px; height: 7px; border-radius: 3px; background: #d4d3e0; }
+.nav.on { background: var(--soft); color: var(--violet); }
+.nav.on::before { background: var(--violet); }
+.side .foot { margin-top: auto; padding: 10px; border-radius: 10px; background: var(--soft); color: var(--sub); font-size: 11.5px; }
+
+.main { padding: 18px 20px; display: flex; flex-direction: column; gap: 14px; min-width: 0; }
+.top { display: flex; align-items: center; justify-content: space-between; }
+h1 { font-size: 20px; font-weight: 700; letter-spacing: -0.01em; }
+h2 { font-size: 14px; font-weight: 600; }
+.muted { color: var(--sub); }
+.small { font-size: 11.5px; }
+.row { display: flex; align-items: center; gap: 8px; }
+.grow { flex: 1; min-width: 0; }
+
+.btn { padding: 7px 12px; border-radius: 9px; font-weight: 600; font-size: 12px; background: #14131a; color: #fff; }
+.btn.ghost { background: #fff; color: #14131a; border: 1px solid var(--line); }
+.btn.accent { background: linear-gradient(90deg, #06b6d4, #7c3aed); }
+.search { padding: 7px 12px; border-radius: 9px; background: #fff; border: 1px solid var(--line); color: #9a99a8; width: 190px; }
+
+.panel { min-width: 0; background: #fff; border: 1px solid var(--line); border-radius: 14px; box-shadow: 0 8px 24px -14px rgba(91, 60, 196, 0.25); }
+.pad { padding: 14px; }
+
+table { width: 100%; border-collapse: collapse; }
+th { white-space: nowrap; text-align: left; font-size: 11px; font-weight: 600; color: var(--sub); padding: 10px 12px; border-bottom: 1px solid var(--line); }
+td { padding: 9px 12px; border-bottom: 1px solid #f1f1f6; white-space: nowrap; }
+tr:last-child td { border-bottom: 0; }
+tr.sel td { background: #faf8ff; }
+
+.av { width: 24px; height: 24px; border-radius: 50%; display: inline-grid; place-items: center; font-size: 10px; font-weight: 700; color: #fff; background: linear-gradient(135deg, #22d3ee, #8b5cf6); flex: none; }
+.av.b { background: linear-gradient(135deg, #a78bfa, #f472b6); }
+.av.c { background: linear-gradient(135deg, #34d399, #22d3ee); }
+
+.tag { display: inline-block; white-space: nowrap; padding: 2px 9px; border-radius: 999px; font-size: 11px; font-weight: 600; }
+.t-violet { background: #ede9fe; color: #6d28d9; }
+.t-cyan { background: #cffafe; color: #0e7490; }
+.t-green { background: #d1fae5; color: #047857; }
+.t-amber { background: #fef3c7; color: #b45309; }
+.t-pink { background: #fce7f3; color: #be185d; }
+.t-blue { background: #dbeafe; color: #1d4ed8; }
+.t-gray { background: #f1f1f6; color: var(--sub); }
+.ai { background: linear-gradient(90deg, #ecfeff, #f5f3ff); color: #6d28d9; border: 1px solid #e3ddff; }
+.ai::before { content: '✦ '; color: var(--cyan); }
+
+.kv { display: grid; grid-template-columns: 78px 1fr; gap: 7px 10px; font-size: 12px; }
+.kv dt { color: var(--sub); }
+.kv dd { font-weight: 600; }
+.quote { background: var(--soft); border-radius: 10px; padding: 10px 12px; font-size: 12px; color: #3d3c49; }
+.bar { height: 6px; border-radius: 99px; background: #eeedf6; overflow: hidden; }
+.bar i { display: block; height: 100%; border-radius: 99px; background: linear-gradient(90deg, #06b6d4, #7c3aed); }
+.stat { flex: 1; }
+.stat b { display: block; font-size: 20px; font-weight: 700; letter-spacing: -0.01em; }

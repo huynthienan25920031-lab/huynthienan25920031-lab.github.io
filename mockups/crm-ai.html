@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8" />
+<title>Minh họa · CRM nội bộ có AI</title>
+<link rel="stylesheet" href="mock.css" />
+<style>
+  .wrap { display: grid; grid-template-columns: minmax(0, 1fr) 250px; gap: 14px; flex: 1; min-height: 0; }
+  td, th { padding-left: 10px; padding-right: 6px; font-size: 12.5px; }
+  .side-ai { display: flex; flex-direction: column; gap: 12px; }
+</style>
+</head>
+<body>
+<div class="app">
+  <aside class="side">
+    <div class="brand"><i></i>CRM nội bộ</div>
+    <div class="nav on">Khách hàng</div>
+    <div class="nav">Hội thoại</div>
+    <div class="nav">Đơn hàng</div>
+    <div class="nav">Báo cáo</div>
+    <div class="nav">Phân quyền</div>
+    <div class="foot">Vai trò: <b>Quản lý</b><br />Dữ liệu mẫu</div>
+  </aside>
+  <main class="main">
+    <div class="top">
+      <div><h1>Khách hàng</h1><div class="muted small">120 khách · AI đã phân loại 100%</div></div>
+      <div class="row"><div class="search">Tìm khách hàng…</div><div class="btn accent">+ Thêm khách</div></div>
+    </div>
+    <div class="wrap">
+      <div class="panel">
+        <table>
+          <tr><th>Khách hàng</th><th>Nguồn</th><th>AI phân loại</th><th>Trạng thái</th></tr>
+          <tr class="sel"><td><div class="row"><span class="av">VA</span><b>Nguyễn Văn An</b></div></td><td>Zalo</td><td><span class="tag ai">Tiềm năng cao</span></td><td><span class="tag t-cyan">Mới</span></td></tr>
+          <tr><td><div class="row"><span class="av b">TB</span><b>Trần Thị Bình</b></div></td><td>Facebook</td><td><span class="tag ai">Hỏi giá</span></td><td><span class="tag t-amber">Đang tư vấn</span></td></tr>
+          <tr><td><div class="row"><span class="av c">MC</span><b>Lê Minh Châu</b></div></td><td>Website</td><td><span class="tag ai">Khách quay lại</span></td><td><span class="tag t-green">Đã chốt</span></td></tr>
+          <tr><td><div class="row"><span class="av">TD</span><b>Phạm Thu Dung</b></div></td><td>Zalo</td><td><span class="tag ai">Cần chăm sóc</span></td><td><span class="tag t-amber">Đang tư vấn</span></td></tr>
+          <tr><td><div class="row"><span class="av b">GH</span><b>Hoàng Gia Huy</b></div></td><td>Facebook</td><td><span class="tag ai">Tiềm năng cao</span></td><td><span class="tag t-cyan">Mới</span></td></tr>
+          <tr><td><div class="row"><span class="av c">TL</span><b>Võ Thị Lan</b></div></td><td>Website</td><td><span class="tag ai">Hỏi giá</span></td><td><span class="tag t-gray">Tạm dừng</span></td></tr>
+          <tr><td><div class="row"><span class="av">QM</span><b>Đặng Quốc Minh</b></div></td><td>Zalo</td><td><span class="tag ai">Khách quay lại</span></td><td><span class="tag t-green">Đã chốt</span></td></tr>
+          <tr><td><div class="row"><span class="av b">HN</span><b>Bùi Hồng Nhung</b></div></td><td>Facebook</td><td><span class="tag ai">Cần chăm sóc</span></td><td><span class="tag t-amber">Đang tư vấn</span></td></tr>
+        </table>
+      </div>
+      <div class="side-ai">
+        <div class="panel pad">
+          <div class="row" style="justify-content:space-between"><h2>AI vừa trích xuất</h2><span class="tag t-green">Tin cậy 90%</span></div>
+          <div class="quote" style="margin:10px 0 12px">“Chào shop, mình cần 20 bộ đồng phục, giao trước ngày 15/11, ngân sách khoảng 10 triệu.”</div>
+          <dl class="kv">
+            <dt>Khách</dt><dd>Nguyễn Văn An</dd>
+            <dt>Nhu cầu</dt><dd>20 bộ đồng phục</dd>
+            <dt>Hạn giao</dt><dd>15/11</dd>
+            <dt>Ngân sách</dt><dd>10.000.000 đ</dd>
+            <dt>Phân loại</dt><dd><span class="tag ai">Tiềm năng cao</span></dd>
+          </dl>
+          <div class="row" style="margin-top:14px"><div class="btn accent grow" style="text-align:center">Lưu vào CRM</div><div class="btn ghost">Sửa</div></div>
+        </div>
+        <div class="panel pad">
+          <h2>Hôm nay</h2>
+          <div class="row" style="margin-top:10px">
+            <div class="stat"><b>40</b><span class="muted small">tin nhắn đã xử lý</span></div>
+            <div class="stat"><b>70%</b><span class="muted small">tự nhập liệu</span></div>
+          </div>
+          <div class="bar" style="margin-top:10px"><i style="width:70%"></i></div>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>
+</body>
+</html>

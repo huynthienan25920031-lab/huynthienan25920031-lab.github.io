@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8" />
+<title>Minh họa · Web bán hàng tốc độ cao</title>
+<link rel="stylesheet" href="mock.css" />
+<style>
+  body { display: flex; flex-direction: column; }
+  .bar-top { background: #fff; border-bottom: 1px solid var(--line); padding: 12px 24px; display: flex; align-items: center; gap: 22px; font-weight: 500; }
+  .bar-top .brand { padding: 0; margin-right: 10px; }
+  .page { flex: 1; display: grid; grid-template-columns: 300px 1fr 250px; gap: 20px; padding: 20px 24px; min-height: 0; }
+  .photo { border-radius: 16px; background: radial-gradient(90% 70% at 25% 15%, rgba(255,255,255,.9), transparent 60%), linear-gradient(135deg, #a5f3fc, #c4b5fd 60%, #fbcfe8); display: grid; place-items: center; }
+  .shirt { width: 150px; height: 160px; background: #fff; clip-path: polygon(22% 0, 38% 0, 50% 10%, 62% 0, 78% 0, 100% 20%, 86% 38%, 78% 32%, 78% 100%, 22% 100%, 22% 32%, 14% 38%, 0 20%); box-shadow: 0 0 0 1px #e9e9f0; }
+  .thumbs { display: flex; gap: 8px; margin-top: 10px; }
+  .thumbs i { flex: 1; height: 54px; border-radius: 10px; background: linear-gradient(135deg, #e0f2fe, #ede9fe); }
+  .price { font-size: 26px; font-weight: 700; margin: 10px 0 2px; }
+  .size { display: inline-grid; place-items: center; width: 40px; height: 34px; border-radius: 9px; border: 1px solid var(--line); background: #fff; font-weight: 600; }
+  .size.on { border-color: var(--violet); color: var(--violet); background: #f5f3ff; }
+  .ring { width: 92px; height: 92px; border-radius: 50%; background: conic-gradient(#10b981 0 100%, #e5e7eb 0); display: grid; place-items: center; margin: 6px auto 4px; }
+  .ring b { width: 74px; height: 74px; border-radius: 50%; background: #fff; display: grid; place-items: center; font-size: 26px; color: #047857; }
+  .vital { display: flex; align-items: center; justify-content: space-between; padding: 9px 0; border-top: 1px solid #f1f1f6; }
+  .vital b { color: #047857; font-size: 15px; }
+</style>
+</head>
+<body>
+<div class="bar-top"><div class="brand"><i></i>Cửa hàng mẫu</div><span>Áo thun</span><span>Sơ mi</span><span>Quần</span><span>Phụ kiện</span><span class="grow"></span><div class="search">Tìm sản phẩm…</div><div class="btn ghost">Giỏ hàng · 2</div></div>
+<div class="page">
+  <div><div class="photo" style="height:330px"><div class="shirt"></div></div><div class="thumbs"><i></i><i></i><i></i><i></i></div></div>
+  <div>
+    <span class="tag t-cyan">Bán chạy</span>
+    <h1 style="margin-top:8px;font-size:24px">Áo thun cotton basic</h1>
+    <div class="muted">Đã bán 1.000 · 500 đánh giá · còn 100 sản phẩm</div>
+    <div class="price">200.000 đ</div>
+    <div class="muted small">Đồng bộ tồn kho với sàn TMĐT: vừa xong</div>
+    <h2 style="margin:16px 0 8px">Kích cỡ</h2>
+    <div class="row"><span class="size">S</span><span class="size on">M</span><span class="size">L</span><span class="size">XL</span></div>
+    <div class="row" style="margin-top:18px"><div class="btn accent" style="padding:11px 22px;font-size:13px">Thêm vào giỏ</div><div class="btn ghost" style="padding:11px 22px;font-size:13px">Mua ngay</div></div>
+    <div class="panel pad" style="margin-top:18px"><h2>Mô tả</h2><p class="muted" style="margin-top:6px">Cotton 100%, form rộng vừa, 5 màu. Giao trong 3 ngày, đổi trả trong 7 ngày.</p></div>
+  </div>
+  <div class="panel pad">
+    <div class="row" style="justify-content:space-between"><h2>Core Web Vitals</h2><span class="tag t-green">Đạt</span></div>
+    <div class="ring"><b>100</b></div>
+    <div class="muted small" style="text-align:center;margin-bottom:8px">Điểm hiệu năng</div>
+    <div class="vital"><span>LCP<br /><span class="muted small">Hiển thị nội dung chính</span></span><b>1,0 s</b></div>
+    <div class="vital"><span>INP<br /><span class="muted small">Phản hồi thao tác</span></span><b>80 ms</b></div>
+    <div class="vital"><span>CLS<br /><span class="muted small">Độ ổn định bố cục</span></span><b>0,01</b></div>
+    <div class="vital"><span>JSON-LD<br /><span class="muted small">Dữ liệu có cấu trúc</span></span><b>Hợp lệ</b></div>
+  </div>
+</div>
+</body>
+</html>

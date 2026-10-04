@@ -24,10 +24,21 @@ Toàn bộ nội dung nằm trong `data/`, không cần đụng tới component:
 
 ## Ảnh
 
-Thả ảnh vào `public/images/` rồi build lại: `avatar.jpg` cho ảnh chân dung ở hero, `<slug>-1.png` cho từng sản phẩm
-(danh sách tên file ở `public/images/README.md`). File nào chưa có thì trang tự hiện placeholder gradient.
+Ảnh nằm trong `public/images/` (danh sách và nguồn từng file ở `public/images/README.md`):
+
+- `avatar.jpg`: ảnh chân dung ở hero, tỉ lệ 4:5.
+- `<slug>-1.webp`: ảnh từng sản phẩm. Sản phẩm nào có `isMockup: true` trong `data/projects.ts` thì card hiện dòng
+  "Giao diện minh họa · dữ liệu mẫu"; thay bằng ảnh chụp thật thì đặt `false`.
+- Giao diện minh họa dựng bằng HTML tĩnh trong `mockups/` (ngoài app, không thành route). Sửa xong chạy
+  `node mockups/capture.mjs` để chụp lại WebP 2x (cần Edge hoặc Chrome; đặt `BROWSER_PATH` nếu ở vị trí khác).
+- Dải cực quang chính của hero là ảnh blur sẵn, tạo bằng `node scripts/make-aurora.mjs`.
 
 Logo nằm ở `components/Logo.tsx`; favicon `app/icon.svg` và ảnh Open Graph dùng lại cùng các nét đó, sửa logo thì sửa cả ba.
+
+## Hiệu năng
+
+Card dùng `backdrop-filter`. `components/QualityGuard.tsx` đo FPS thật khi vào trang và khi cuộn; máy nào không giữ được
+khoảng 45fps thì tự chuyển sang nền trắng 85% không blur. Thử tay bằng `?quality=low` hoặc `?quality=high` trên URL.
 
 ## Công nghệ và SEO
 

@@ -15,8 +15,8 @@
   --font-mono: 'Courier New', Courier, monospace;
 
   /* Tầng 2: card thường · Tầng 3: card nổi bật */
-  --shadow-card: 0 1px 2px rgba(20, 19, 26, 0.05), 0 10px 28px -8px rgba(20, 19, 26, 0.1);
-  --shadow-feature: 0 2px 6px rgba(20, 19, 26, 0.06), 0 30px 64px -18px rgba(91, 60, 196, 0.3);
+  --shadow-card: 0 1px 2px rgba(20, 19, 26, 0.04), 0 14px 34px -12px rgba(91, 60, 196, 0.18);
+  --shadow-feature: 0 2px 6px rgba(20, 19, 26, 0.05), 0 34px 70px -20px rgba(91, 60, 196, 0.34);
 }
 
 html {
@@ -50,21 +50,78 @@ body {
   background-image: linear-gradient(90deg, #38bdf8, #8b5cf6);
 }
 
-/* ── Elevation ─────────────────────────────────────────── */
-.card {
-  background: #fff;
-  border: 1px solid rgba(0, 0, 0, 0.05);
-  border-radius: 1.25rem;
-  box-shadow: var(--shadow-card);
+/* ── Card dạng glass ───────────────────────────────────── */
+.card,
+.card-feature {
+  position: relative;
+  -webkit-backdrop-filter: blur(16px) saturate(160%);
+  backdrop-filter: blur(16px) saturate(160%);
 }
 
+.card {
+  background: rgba(255, 255, 255, 0.62);
+  border: 1px solid rgba(255, 255, 255, 0.7);
+  border-radius: 1.25rem;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.95),
+    var(--shadow-card);
+}
+
+/* Card nổi bật: đục hơn một chút, bóng sâu hơn, viền gradient cyan → tím */
 .card-feature {
-  border: 1px solid transparent;
+  background: rgba(255, 255, 255, 0.66);
   border-radius: 1.75rem;
-  background:
-    linear-gradient(#fff, #fff) padding-box,
-    linear-gradient(135deg, #67e8f9, #a78bfa) border-box;
-  box-shadow: var(--shadow-feature);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.95),
+    var(--shadow-feature);
+}
+
+.card-feature::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  padding: 1.5px;
+  border-radius: inherit;
+  background: linear-gradient(135deg, #67e8f9, #a78bfa);
+  -webkit-mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  mask-composite: exclude;
+  pointer-events: none;
+}
+
+/* Vệt sáng mảnh ở cạnh trên */
+.card::after,
+.card-feature::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 14%;
+  right: 14%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, #fff, transparent);
+  pointer-events: none;
+}
+
+/* Thẻ nổi trên ảnh chân dung: nền đục, không blur, vì nó nằm trên canvas hạt đang chạy */
+.glass-chip {
+  background: rgba(255, 255, 255, 0.88);
+  border: 1px solid rgba(255, 255, 255, 0.9);
+  box-shadow:
+    inset 0 1px 0 #fff,
+    0 10px 26px -8px rgba(91, 60, 196, 0.35);
+}
+
+/* Chế độ tự hạ chất lượng (QualityGuard): bỏ blur, nền trắng 85% */
+html[data-quality='low'] .card,
+html[data-quality='low'] .card-feature {
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
+  background: rgba(255, 255, 255, 0.85);
 }
 
 /* Quầng sáng cực quang quanh card sản phẩm chủ lực */
@@ -81,7 +138,8 @@ body {
   overflow: hidden;
 }
 
-.tilt > :not(.tilt-spot) {
+/* nội dung nằm trên vệt sáng; .tilt-float là phần tử nổi tự định vị (absolute) */
+.tilt > :not(.tilt-spot):not(.tilt-float) {
   position: relative;
 }
 
@@ -97,6 +155,15 @@ body {
   opacity: 0;
   transition: opacity 0.3s;
   pointer-events: none;
+}
+
+.tilt-open {
+  overflow: visible;
+}
+
+/* vệt sáng trắng dùng trên ảnh */
+.tilt-spot-light {
+  background: radial-gradient(closest-side, rgba(255, 255, 255, 0.38), rgba(255, 255, 255, 0.1) 55%, transparent);
 }
 
 @media (hover: hover) and (pointer: fine) {
@@ -126,23 +193,79 @@ body {
   animation: rise 0.8s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
-.portrait-ring {
-  background: conic-gradient(from 210deg, #67e8f9, #a78bfa, #f9a8d4, #6ee7b7, #67e8f9);
+/* Khung chân dung: viền gradient mảnh cyan → tím → hồng, bóng màu nhẹ */
+.portrait-frame {
+  padding: 1.5px;
+  border-radius: 28px;
+  background: linear-gradient(140deg, #67e8f9, #a78bfa 50%, #f9a8d4);
   box-shadow:
-    0 0 34px rgba(103, 232, 249, 0.6),
-    0 0 76px rgba(167, 139, 250, 0.5),
-    var(--shadow-feature);
+    0 34px 70px -22px rgba(139, 92, 246, 0.5),
+    0 12px 32px -12px rgba(56, 189, 248, 0.4);
 }
 
-@keyframes orbit-spin {
-  to {
-    transform: rotate(360deg);
+@keyframes live-dot {
+  0%,
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.35;
+    transform: scale(0.8);
   }
 }
 
-.orbit-ring {
-  animation: orbit-spin 70s linear infinite;
+.live-dot {
+  box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.2);
+  animation: live-dot 1.6s ease-in-out infinite;
+}
+
+/* ── Dải cực quang chính của hero ─────────────────────── */
+@keyframes ribbon-flow {
+  to {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+@keyframes ribbon-sway {
+  from {
+    transform: translateY(-5%) scaleY(0.82) skewX(-5deg);
+  }
+  to {
+    transform: translateY(5%) scaleY(1.22) skewX(5deg);
+  }
+}
+
+@keyframes ribbon-pulse {
+  from {
+    opacity: 0.55;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.ribbon-track {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 200%;
+  height: 100%;
+  background-size: 50% 100%;
+  background-repeat: repeat-x;
   will-change: transform;
+  animation: ribbon-flow 26s linear infinite;
+}
+
+.ribbon-sway {
+  will-change: transform;
+  animation: ribbon-sway 9s ease-in-out infinite alternate;
+}
+
+/* 5s đi + 5s về = chu kỳ 10s */
+.ribbon-pulse {
+  will-change: opacity;
+  animation: ribbon-pulse 5s ease-in-out infinite alternate;
 }
 
 /* ── Cực quang: gradient mềm sẵn, chỉ animate transform ── */
@@ -208,6 +331,12 @@ body {
   position: absolute;
   inset: 0;
   will-change: opacity;
+}
+
+/* Vệt loang của lớp nền cố định đứng yên (chỉ trôi theo cuộn/chuột): nếu chúng chuyển động
+   liên tục thì mọi card glass phía trên phải blur lại mỗi frame. */
+.aurora-tint .aurora-ribbon {
+  animation: none;
 }
 
 /* ── Timeline ─────────────────────────────────────────── */
@@ -283,7 +412,10 @@ a:focus-visible .logo-chevron {
   .rise,
   .aurora-ribbon,
   .marquee-track,
-  .orbit-ring,
+  .ribbon-track,
+  .ribbon-sway,
+  .ribbon-pulse,
+  .live-dot,
   .logo-draw path,
   .logo-draw ellipse {
     animation: none;
