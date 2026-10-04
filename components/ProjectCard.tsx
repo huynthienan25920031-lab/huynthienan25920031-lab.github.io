@@ -85,7 +85,7 @@ export default function ProjectCard({ project, hasImage, index }: Props) {
         <article className="flex h-full flex-col p-5 sm:p-6">
           <ProjectFrame
             {...frame}
-            aspect={tall ? 'aspect-[4/3]' : 'aspect-[16/9]'}
+            aspect={tall ? 'aspect-[16/10]' : 'aspect-[16/9]'}
             sizes="(min-width: 1024px) 340px, (min-width: 768px) 45vw, 90vw"
           />
           <h3 className={`mt-5 font-semibold ${tall ? 'text-2xl' : 'text-xl'}`}>{title}</h3>

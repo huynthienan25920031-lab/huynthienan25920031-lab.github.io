@@ -10,6 +10,8 @@ export type Project = {
   size: 'featured' | 'tall' | 'default' | 'small';
   /** Ảnh chụp sản phẩm. Chưa có file thì card hiện placeholder gradient kèm tên. */
   image: string;
+  /** Phần ảnh được giữ lại khi khung cắt bớt (CSS object-position). Mặc định 'top'. */
+  imagePosition?: string;
   /** Khung bao quanh ảnh: cửa sổ trình duyệt hoặc điện thoại. */
   frame: 'browser' | 'phone';
   features?: string[];
@@ -41,6 +43,7 @@ export const projects: Project[] = [
     title: 'CRM nội bộ có AI',
     size: 'tall',
     image: image('crm-ai'),
+    imagePosition: 'left top',
     frame: 'browser',
     description: 'AI phân loại và nhập dữ liệu, kiến trúc module, phân quyền RBAC.',
     stack: ['Next.js', 'Node.js', 'Docker', 'LLM'],

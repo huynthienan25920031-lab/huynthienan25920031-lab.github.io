@@ -41,7 +41,8 @@ export default function ProjectFrame({
       unoptimized
       loading="lazy"
       sizes={sizes}
-      className="object-cover object-top"
+      className="object-cover"
+      style={{ objectPosition: project.imagePosition ?? 'top' }}
     />
   ) : (
     <div

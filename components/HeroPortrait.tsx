@@ -35,7 +35,9 @@ export default function HeroPortrait({ src, alt, hasImage, className = '' }: Pro
           <line key={i} x1={dash.x1} y1={dash.y1} x2={dash.x2} y2={dash.y2} stroke={dash.color} opacity={dash.opacity} />
         ))}
       </svg>
-      <div className="relative h-full w-full overflow-hidden rounded-full bg-white shadow-feature ring-1 ring-black/5">
+      {/* Vòng sáng gradient + viền trắng dày: tách ảnh (nền đỏ) khỏi tone cực quang mà không sửa màu ảnh */}
+      <div className="portrait-ring relative h-full w-full rounded-full p-[3px]">
+      <div className="relative h-full w-full overflow-hidden rounded-full border-[5px] border-white bg-white md:border-[8px] lg:border-[10px]">
         {hasImage ? (
           <Image src={src} alt={alt} fill unoptimized priority sizes="(min-width: 1024px) 320px, 176px" className="object-cover" />
         ) : (
@@ -49,6 +51,7 @@ export default function HeroPortrait({ src, alt, hasImage, className = '' }: Pro
             <Logo size={96} className="h-[38%] w-[38%]" />
           </div>
         )}
+      </div>
       </div>
     </div>
   );
