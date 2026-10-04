@@ -47,7 +47,7 @@ export const projects: Project[] = [
     frame: 'browser',
     description:
       'Lập lịch làm việc thông minh có AI đi cùng: lịch tuần, theo dõi khối lượng giờ làm, AI Assistant gợi ý và sắp xếp lịch, đồng bộ đa nền tảng (PWA).',
-    stack: ['Next.js', 'React', 'Supabase', 'AI', 'PWA'],
+    stack: ['Next.js', 'React', 'Prisma', 'PostgreSQL', 'AI', 'PWA'],
   },
   {
     slug: 'ai-seo',

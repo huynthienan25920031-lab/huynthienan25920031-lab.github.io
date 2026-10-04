@@ -62,6 +62,7 @@ export default function Home() {
                   alt={`Chân dung ${site.fullName}`}
                   hasImage={publicFileExists(site.avatar)}
                   badge={site.role}
+                  badgeShort={site.roleShort}
                 />
               </div>
             </div>

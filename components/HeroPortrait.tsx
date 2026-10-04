@@ -1,10 +1,18 @@
 import Image from 'next/image';
 import Logo from './Logo';
 
-type Props = { src: string; alt: string; hasImage: boolean; badge: string; className?: string };
+type Props = {
+  src: string;
+  alt: string;
+  hasImage: boolean;
+  badge: string;
+  /** Bản rút gọn của thẻ, hiện dưới 640px. */
+  badgeShort: string;
+  className?: string;
+};
 
 /** Khung chân dung chữ nhật 4:5: viền gradient mảnh, viền kính trắng mờ, thẻ vai trò nổi ở góc dưới trái. */
-export default function HeroPortrait({ src, alt, hasImage, badge, className = '' }: Props) {
+export default function HeroPortrait({ src, alt, hasImage, badge, badgeShort, className = '' }: Props) {
   return (
     <div data-particle-mask="" className={`portrait-frame relative aspect-[4/5] ${className}`}>
       <div className="h-full rounded-[inherit] border border-white/70 bg-white/45 p-1 lg:p-2">
@@ -32,9 +40,10 @@ export default function HeroPortrait({ src, alt, hasImage, badge, className = ''
           )}
         </div>
       </div>
-      <p className="glass-chip absolute -left-2 bottom-3 flex items-center gap-1.5 whitespace-nowrap rounded-full px-2 py-1 text-[10px] font-medium text-ink sm:text-xs lg:-left-5 lg:bottom-6 lg:gap-2 lg:px-3.5 lg:py-1.5 lg:text-[13px]">
+      <p className="glass-chip absolute -left-2 bottom-3 flex items-center gap-1.5 whitespace-nowrap rounded-full px-2 py-1 text-xs font-medium text-ink lg:-left-5 lg:bottom-6 lg:gap-2 lg:px-3.5 lg:py-1.5 lg:text-[13px]">
         <span aria-hidden="true" className="live-dot h-1.5 w-1.5 rounded-full bg-emerald-500 lg:h-2 lg:w-2" />
-        {badge}
+        <span className="sm:hidden">{badgeShort}</span>
+        <span className="hidden sm:inline">{badge}</span>
       </p>
     </div>
   );

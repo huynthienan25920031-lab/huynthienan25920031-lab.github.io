@@ -3,6 +3,8 @@ export const site = {
   fullName: 'Thiên Ân (Adam)',
   /** Hiện trên thẻ nổi ở góc khung ảnh chân dung. */
   role: 'AI Software Engineer',
+  /** Bản rút gọn của thẻ, dùng dưới 640px. */
+  roleShort: 'AI Engineer',
   status: 'đang nhận dự án · q4/2026',
   tagline: 'Kỹ sư fullstack đưa AI vào những quy trình còn làm bằng tay.',
   phone: '0985 905 443',
