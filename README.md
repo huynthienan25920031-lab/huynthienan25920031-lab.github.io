@@ -6,11 +6,10 @@ Portfolio một trang: Next.js (App Router, TypeScript) + Tailwind CSS, xuất t
 
 ```bash
 npm install
-npm run dev      # http://localhost:3000/anhuynh-engineer
+npm run dev      # http://localhost:3000
 npm run build    # xuất tĩnh ra thư mục out/
+npm start        # xem thử bản tĩnh trong out/ (npx serve out)
 ```
-
-Vì có `basePath`, trang nằm ở `/anhuynh-engineer`, không phải `/`.
 
 ## Chỉnh nội dung
 
@@ -34,8 +33,9 @@ navbar trỏ tới chúng qua mục "Trang mẫu" và "Gallery" trong `data/site
 
 ## Deploy
 
-1. Tạo repo `anhuynh-engineer` trên GitHub rồi push nhánh `main`.
+1. Tạo repo `huynhthienan25920031-lab.github.io` trên GitHub rồi push nhánh `main`.
 2. Vào Settings → Pages → Source, chọn **GitHub Actions**.
 3. Workflow `.github/workflows/deploy.yml` tự build và deploy mỗi lần push lên `main`.
 
-Nếu đổi tên repo, sửa `basePath` trong `next.config.ts` và `basePath`, `siteUrl` trong `data/site.ts` cho khớp.
+Trang chạy ở gốc tên miền `https://huynhthienan25920031-lab.github.io` nên không cần `basePath`. Nếu chuyển sang repo dạng
+`<user>.github.io/<repo>`, thêm `basePath: '/<repo>'` vào `next.config.ts`, sửa `siteUrl` và hai link `.html` trong `data/site.ts`.

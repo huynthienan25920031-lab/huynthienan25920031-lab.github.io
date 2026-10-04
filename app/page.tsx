@@ -1,6 +1,7 @@
 import { ArrowDown, Mail, MessageCircle, Phone } from 'lucide-react';
 import AntigravityField from '@/components/AntigravityField';
 import Aurora from '@/components/Aurora';
+import Navbar from '@/components/Navbar';
 import ProjectCard from '@/components/ProjectCard';
 import Radar from '@/components/Radar';
 import SkillMeter from '@/components/SkillMeter';
@@ -8,7 +9,7 @@ import TechChip from '@/components/TechChip';
 import Timeline from '@/components/Timeline';
 import { timeline } from '@/data/experience';
 import { projects } from '@/data/projects';
-import { nav, site, stats } from '@/data/site';
+import { site, stats } from '@/data/site';
 import { allTech, radarAxes, skillGroups } from '@/data/skills';
 
 const container = 'mx-auto w-full max-w-6xl px-5 sm:px-8';
@@ -33,27 +34,7 @@ export default function Home() {
 
   return (
     <>
-      <header className="sticky top-0 z-50 border-b border-hairline bg-white/70 backdrop-blur-md">
-        <nav aria-label="Điều hướng chính" className={`${container} flex h-14 items-center justify-between`}>
-          <a href="#top" className="flex shrink-0 items-center gap-2.5" aria-label={`${site.name}, về đầu trang`}>
-            <span className="font-display grid h-7 w-7 place-items-center rounded-lg bg-ink text-sm font-bold text-white">
-              A
-            </span>
-            <span className="font-display hidden font-semibold sm:inline">{site.name}</span>
-          </a>
-          <div className="ml-4 min-w-0 overflow-x-auto [scrollbar-width:none]">
-            <ul className="flex w-max items-center gap-3.5 px-1 py-2 text-[13px] text-sub sm:gap-6 sm:text-sm">
-              {nav.map((item) => (
-                <li key={item.href}>
-                  <a href={item.href} className="whitespace-nowrap py-2 transition-colors hover:text-ink">
-                    {item.label}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
-        </nav>
-      </header>
+      <Navbar />
 
       <main id="top">
         <section className="relative isolate flex min-h-[90vh] items-center overflow-hidden">

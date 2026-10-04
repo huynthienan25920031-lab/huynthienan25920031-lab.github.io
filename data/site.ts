@@ -10,9 +10,8 @@ export const site = {
   year: 2026,
 };
 
-/** Phải khớp với basePath trong next.config.ts (dùng cho file tĩnh trong public/). */
-export const basePath = '/anhuynh-engineer';
-export const siteUrl = 'https://anhuynh-cpu.github.io/anhuynh-engineer';
+/** Địa chỉ trang khi deploy (repo huynhthienan25920031-lab.github.io, phục vụ ở gốc tên miền). */
+export const siteUrl = 'https://huynhthienan25920031-lab.github.io';
 /** Ảnh Open Graph, sinh lúc build bởi app/og.png/route.tsx. */
 export const ogImage = { url: `${siteUrl}/og.png`, width: 1200, height: 630 };
 
@@ -20,8 +19,8 @@ export const nav = [
   { label: 'Kỹ năng', href: '#ky-nang' },
   { label: 'Sản phẩm', href: '#san-pham' },
   { label: 'Kinh nghiệm', href: '#kinh-nghiem' },
-  { label: 'Trang mẫu', href: `${basePath}/product-demo.html` },
-  { label: 'Gallery', href: `${basePath}/showcase.html` },
+  { label: 'Trang mẫu', href: '/product-demo.html' },
+  { label: 'Gallery', href: '/showcase.html' },
   { label: 'Liên hệ', href: '#lien-he' },
 ];
 
