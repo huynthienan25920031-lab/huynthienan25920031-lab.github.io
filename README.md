@@ -53,9 +53,9 @@ navbar trỏ tới chúng qua mục "Trang mẫu" và "Gallery" trong `data/site
 
 ## Deploy
 
-1. Tạo repo `huynhthienan25920031-lab.github.io` trên GitHub rồi push nhánh `main`.
+1. Tạo repo `huynthienan25920031-lab.github.io` trên GitHub rồi push nhánh `main`.
 2. Vào Settings → Pages → Source, chọn **GitHub Actions**.
 3. Workflow `.github/workflows/deploy.yml` tự build và deploy mỗi lần push lên `main`.
 
-Trang chạy ở gốc tên miền `https://huynhthienan25920031-lab.github.io` nên không cần `basePath`. Nếu chuyển sang repo dạng
+Trang chạy ở gốc tên miền `https://huynthienan25920031-lab.github.io` nên không cần `basePath`. Nếu chuyển sang repo dạng
 `<user>.github.io/<repo>`, thêm `basePath: '/<repo>'` vào `next.config.ts`, sửa `siteUrl` và hai link `.html` trong `data/site.ts`.

@@ -16,8 +16,8 @@ export const site = {
   year: 2026,
 };
 
-/** Địa chỉ trang khi deploy (repo huynhthienan25920031-lab.github.io, phục vụ ở gốc tên miền). */
-export const siteUrl = 'https://huynhthienan25920031-lab.github.io';
+/** Địa chỉ trang khi deploy (repo huynthienan25920031-lab.github.io, phục vụ ở gốc tên miền). */
+export const siteUrl = 'https://huynthienan25920031-lab.github.io';
 /** Ảnh Open Graph, sinh lúc build bởi app/og.png/route.tsx. */
 export const ogImage = { url: `${siteUrl}/og.png`, width: 1200, height: 630 };
 
