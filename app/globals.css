@@ -1,0 +1,158 @@
+@import 'tailwindcss';
+
+@theme inline {
+  --color-page: #fbfbfe;
+  --color-ink: #14131a;
+  --color-sub: #4b4a57;
+  --color-faint: #6b6a77;
+  --color-result: #047857;
+  --color-hairline: rgba(0, 0, 0, 0.07);
+  --color-accent-from: #38bdf8;
+  --color-accent-to: #8b5cf6;
+
+  --font-display: var(--font-bricolage), system-ui, sans-serif;
+  --font-sans: var(--font-bevietnam), system-ui, sans-serif;
+  --font-mono: 'Courier New', Courier, monospace;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 4.5rem;
+}
+
+body {
+  background: var(--color-page);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+.font-display {
+  letter-spacing: -0.025em;
+}
+
+:focus-visible {
+  outline: 2px solid #8b5cf6;
+  outline-offset: 3px;
+  border-radius: 6px;
+}
+
+.bg-accent {
+  background-image: linear-gradient(90deg, #38bdf8, #8b5cf6);
+}
+
+/* Hero: một chuỗi fade + rise duy nhất */
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.rise {
+  animation: rise 0.8s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/* Cực quang */
+@keyframes aurora-a {
+  from {
+    transform: translateX(-5%) skewX(-7deg) scaleY(0.8);
+  }
+  to {
+    transform: translateX(5%) skewX(7deg) scaleY(1.25);
+  }
+}
+
+@keyframes aurora-b {
+  from {
+    transform: translateX(5%) skewX(6deg) scaleY(1.2);
+  }
+  to {
+    transform: translateX(-5%) skewX(-5deg) scaleY(0.8);
+  }
+}
+
+@keyframes aurora-c {
+  from {
+    transform: translateX(-4%) skewX(4deg) scaleY(0.85);
+  }
+  to {
+    transform: translateX(5%) skewX(-8deg) scaleY(1.25);
+  }
+}
+
+.aurora-ribbon {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+  will-change: transform;
+}
+
+.aurora-ribbon-a {
+  animation-name: aurora-a;
+  animation-duration: 11s;
+}
+
+.aurora-ribbon-b {
+  animation-name: aurora-b;
+  animation-duration: 14s;
+  animation-delay: -5s;
+}
+
+.aurora-ribbon-c {
+  animation-name: aurora-c;
+  animation-duration: 18s;
+  animation-delay: -9s;
+}
+
+/* Dải chip công nghệ */
+@keyframes marquee {
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.marquee {
+  overflow: hidden;
+  mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+}
+
+.marquee-track {
+  display: flex;
+  width: max-content;
+  animation: marquee 48s linear infinite;
+}
+
+.marquee:hover .marquee-track,
+.marquee:focus-within .marquee-track {
+  animation-play-state: paused;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .rise,
+  .aurora-ribbon,
+  .marquee-track {
+    animation: none;
+  }
+
+  .marquee {
+    overflow-x: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    transition-duration: 0.01ms !important;
+    transition-delay: 0ms !important;
+  }
+}
