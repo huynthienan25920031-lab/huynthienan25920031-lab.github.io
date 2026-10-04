@@ -6,9 +6,9 @@ type Props = { src: string; alt: string; hasImage: boolean; badge: string; class
 /** Khung chân dung chữ nhật 4:5: viền gradient mảnh, viền kính trắng mờ, thẻ vai trò nổi ở góc dưới trái. */
 export default function HeroPortrait({ src, alt, hasImage, badge, className = '' }: Props) {
   return (
-    <div className={`portrait-frame relative aspect-[4/5] ${className}`}>
-      <div className="h-full rounded-[26.5px] border border-white/70 bg-white/45 p-1.5 sm:p-2">
-        <div className="relative h-full overflow-hidden rounded-[19px] bg-page">
+    <div data-particle-mask="" className={`portrait-frame relative aspect-[4/5] ${className}`}>
+      <div className="h-full rounded-[inherit] border border-white/70 bg-white/45 p-1 lg:p-2">
+        <div className="relative h-full overflow-hidden rounded-[14px] bg-page lg:rounded-[19px]">
           {hasImage ? (
             <Image
               src={src}
@@ -16,7 +16,7 @@ export default function HeroPortrait({ src, alt, hasImage, badge, className = ''
               fill
               unoptimized
               priority
-              sizes="(min-width: 1600px) 360px, (min-width: 1024px) 280px, (min-width: 768px) 240px, 200px"
+              sizes="(min-width: 1600px) 286px, (min-width: 1024px) 240px, (min-width: 640px) 160px, 130px"
               className="object-cover object-[50%_30%]"
             />
           ) : (
@@ -32,8 +32,8 @@ export default function HeroPortrait({ src, alt, hasImage, badge, className = ''
           )}
         </div>
       </div>
-      <p className="glass-chip absolute -left-3 bottom-5 flex items-center gap-2 whitespace-nowrap rounded-full px-3 py-1.5 text-xs font-medium text-ink sm:-left-5 sm:bottom-6 sm:px-3.5 sm:text-[13px]">
-        <span aria-hidden="true" className="live-dot h-2 w-2 rounded-full bg-emerald-500" />
+      <p className="glass-chip absolute -left-2 bottom-3 flex items-center gap-1.5 whitespace-nowrap rounded-full px-2 py-1 text-[10px] font-medium text-ink sm:text-xs lg:-left-5 lg:bottom-6 lg:gap-2 lg:px-3.5 lg:py-1.5 lg:text-[13px]">
+        <span aria-hidden="true" className="live-dot h-1.5 w-1.5 rounded-full bg-emerald-500 lg:h-2 lg:w-2" />
         {badge}
       </p>
     </div>

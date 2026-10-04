@@ -7,10 +7,12 @@ const VIEW = 32;
 const GLYPH_TOP = 1.4;
 const GLYPH_HEIGHT = 28; // từ đỉnh chevron tới chân chữ A
 // Bề rộng nét ở đây mảnh hơn logo gốc (2.8 / 2.4 / 1.7) để hạt dày lên, đọc rõ thành nét
-const LEGS = { d: 'M6.5 28 16 9.5 25.5 28', width: 1.5 };
-const CHEVRON = { d: 'M12 6.2 16 2.6 20 6.2', width: 1.3 };
-const ORBIT = { cx: 16, cy: 21, rx: 13, ry: 3.6, rotate: (-16 * Math.PI) / 180, width: 0.8 };
+const LEGS = { d: 'M6.5 28 16 9.5 25.5 28', width: 1.9 };
+const CHEVRON = { d: 'M12 6.2 16 2.6 20 6.2', width: 1.7 };
+const ORBIT = { cx: 16, cy: 21, rx: 13, ry: 3.6, rotate: (-16 * Math.PI) / 180, width: 1 };
 
+// Canvas = hộp chữ A cộng lề 6% chiều cao chữ ở mỗi phía (chỗ cho hạt dao động và dạt ra)
+const PAD = 0.06;
 const MAX_DPR = 2;
 const SAMPLE = 384; // cạnh canvas ẩn dùng để lấy mẫu điểm theo nét
 const INTRO = 1.5; // giây: hạt rải rác tụ thành chữ A
@@ -61,7 +63,8 @@ const [X, Y, VX, VY, TX, TY, SX, SY, PHASE, AMP, FREQ, SIZE, DELAY, PART, THETA,
 );
 
 /**
- * Chữ A của logo dựng bằng hạt mịn, đặt sau khung chân dung. Canvas chỉ bao vùng chữ A.
+ * Chữ A của logo dựng bằng hạt mịn, đứng tự do; khung chân dung chồng lên góc dưới phải.
+ * Canvas chỉ bao vùng chữ A.
  * Hạt tụ lại khi load, dao động nhẹ, quỹ đạo có hạt chạy vòng, chevron nhấp nhô; con trỏ tới
  * gần thì hạt dạt ra rồi tự về chỗ (lò xo có damping).
  */
@@ -91,7 +94,7 @@ export default function ParticleLogo({ className = '' }: { className?: string })
     let started = 0; // thời điểm bắt đầu tụ hạt (ms)
     let last = 0;
     const pointer = { x: 0, y: 0, active: false };
-    const quiet = { x0: 0, y0: 0, x1: 0, y1: 0, found: false };
+    let skip: { x0: number; y0: number; x1: number; y1: number }[] = []; // vùng không vẽ hạt
 
     const build = (intro: boolean) => {
       const rect = canvas.getBoundingClientRect();
@@ -103,24 +106,25 @@ export default function ParticleLogo({ className = '' }: { className?: string })
       canvas.height = Math.round(H * dpr);
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
 
-      // Chữ A cao 87.5% canvas (= 1.4 × chiều cao khung ảnh), canh giữa
-      unit = (H * 0.875) / GLYPH_HEIGHT;
+      // Chiều cao canvas = chiều cao chữ A × (1 + 2·PAD); chữ A canh giữa
+      const glyph = H / (1 + 2 * PAD);
+      unit = glyph / GLYPH_HEIGHT;
       ox = (W - VIEW * unit) / 2;
-      oy = H * 0.0625 - GLYPH_TOP * unit;
+      oy = glyph * PAD - GLYPH_TOP * unit;
 
-      const text = document.querySelector<HTMLElement>('[data-particle-quiet]');
-      if (text) {
-        const t = text.getBoundingClientRect();
-        Object.assign(quiet, {
-          x0: t.left - rect.left - 10,
-          y0: t.top - rect.top - 10,
-          x1: t.right - rect.left + 10,
-          y1: t.bottom - rect.top + 10,
-          found: true,
-        });
-      }
+      // Không vẽ hạt đè lên chữ ([data-particle-quiet]) và sau khung ảnh ([data-particle-mask])
+      skip = [...document.querySelectorAll<HTMLElement>('[data-particle-quiet], [data-particle-mask]')].map((el) => {
+        const r = el.getBoundingClientRect();
+        const grow = el.hasAttribute('data-particle-quiet') ? 10 : 0;
+        return {
+          x0: r.left - rect.left - grow,
+          y0: r.top - rect.top - grow,
+          x1: r.right - rect.left + grow,
+          y1: r.bottom - rect.top + grow,
+        };
+      });
 
-      const total = W < 460 ? 700 : 1800;
+      const total = W < 300 ? 900 : W < 400 ? 1500 : 2200;
       const counts = [Math.round(total * 0.56), Math.round(total * 0.3), Math.round(total * 0.14)];
       const targets = [samplePath(LEGS.d, LEGS.width, counts[0]), [], samplePath(CHEVRON.d, CHEVRON.width, counts[2])];
 
@@ -166,6 +170,11 @@ export default function ParticleLogo({ className = '' }: { className?: string })
       group = order.map((index) => bucketOf[index]);
       built = true;
       if (!intro) started = -1e9; // resize: không diễn lại màn tụ hạt
+    };
+
+    const hidden = (x: number, y: number) => {
+      for (const r of skip) if (x > r.x0 && x < r.x1 && y > r.y0 && y < r.y1) return true;
+      return false;
     };
 
     const draw = (t: number, k: number, still: boolean) => {
@@ -235,7 +244,7 @@ export default function ParticleLogo({ className = '' }: { className?: string })
         const o = order[n] * F;
         const x = p[o + X];
         const y = p[o + Y];
-        if (quiet.found && x > quiet.x0 && x < quiet.x1 && y > quiet.y0 && y < quiet.y1) continue; // không đè lên chữ
+        if (hidden(x, y)) continue;
         if (group[n] !== current) {
           current = group[n];
           ctx.fillStyle = PALETTE[current];
@@ -248,7 +257,7 @@ export default function ParticleLogo({ className = '' }: { className?: string })
         const o = index * F;
         const x = p[o + X];
         const y = p[o + Y];
-        if (quiet.found && x > quiet.x0 && x < quiet.x1 && y > quiet.y0 && y < quiet.y1) continue;
+        if (hidden(x, y)) continue;
         ctx.globalAlpha = still ? 0.9 : 0.35 + 0.65 * (0.5 + 0.5 * Math.sin(t * 0.9 + p[o + PHASE]));
         ctx.fillStyle = SPARK[p[o + HUE]];
         const r = p[o + SIZE] + 0.35;

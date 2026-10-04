@@ -177,7 +177,7 @@ html[data-quality='low'] .glass {
 /* Khung chân dung: viền gradient mảnh cyan → tím → hồng, bóng nhỏ (không quầng sáng) */
 .portrait-frame {
   padding: 1.5px;
-  border-radius: 28px;
+  border-radius: clamp(18px, 11.5%, 28px);
   background: linear-gradient(140deg, #67e8f9, #a78bfa 50%, #f9a8d4);
   box-shadow: 0 14px 30px -18px rgba(20, 19, 26, 0.35);
 }

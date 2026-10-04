@@ -44,12 +44,19 @@ export default function Home() {
         >
           <AuroraRibbon />
           <div
-            className={`${container} grid items-center gap-10 pb-20 pt-28 md:grid-cols-[minmax(0,1fr)_auto] md:gap-12 md:py-24 lg:gap-16`}
+            className={`${container} grid items-center gap-8 pb-20 pt-10 lg:grid-cols-[minmax(0,1fr)_auto] lg:gap-16 lg:py-24`}
           >
-            {/* Chữ A hạt nằm sau khung ảnh, cao 1.4 lần khung, lệch lên trên (và sang trái ở desktop) */}
-            <div className="relative mx-auto w-[200px] md:order-2 md:mx-0 md:w-[240px] lg:w-[280px] min-[1600px]:w-[360px]">
-              <ParticleLogo className="pointer-events-none absolute left-[-47.5%] top-[-36%] -z-10 h-[160%] w-[195%] md:left-[-56%]" />
-              <div className="rise" style={rise(2)}>
+            {/*
+              Sân khấu chữ A (--a = chiều cao chữ): chữ A hạt đứng tự do, khung chân dung chồng lên góc
+              dưới phải, chỉ che chân phải và đầu phải vòng quỹ đạo (~11% diện tích chữ A).
+              Chữ A rộng 0.93a; ảnh rộng pw·a (--pw) đặt tại (0.714a, 0.539a).
+            */}
+            <div className="relative h-[calc(var(--a)*(0.539+var(--pw)*1.25))] w-[calc(var(--a)*(0.714+var(--pw)))] [--a:260px] [--pw:0.5] sm:[--a:320px] lg:order-2 lg:[--a:420px] lg:[--pw:0.571] min-[1600px]:[--a:500px]">
+              <ParticleLogo className="pointer-events-none absolute left-[calc(var(--a)*-0.06)] top-[calc(var(--a)*-0.06)] h-[calc(var(--a)*1.12)] w-[calc(var(--a)*1.05)]" />
+              <div
+                className="rise absolute left-[calc(var(--a)*0.714)] top-[calc(var(--a)*0.539)] w-[calc(var(--a)*var(--pw))]"
+                style={rise(2)}
+              >
                 <HeroPortrait
                   src={versionedSrc(site.avatar)}
                   alt={`Chân dung ${site.fullName}`}
