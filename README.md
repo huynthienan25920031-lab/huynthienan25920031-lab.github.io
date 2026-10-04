@@ -37,8 +37,8 @@ Logo nằm ở `components/Logo.tsx`; favicon `app/icon.svg` và ảnh Open Grap
 
 ## Hiệu năng
 
-Card dùng `backdrop-filter`. `components/QualityGuard.tsx` đo FPS thật khi vào trang và khi cuộn; máy nào không giữ được
-khoảng 45fps thì tự chuyển sang nền trắng 85% không blur. Thử tay bằng `?quality=low` hoặc `?quality=high` trên URL.
+Chỉ navbar (khi đã cuộn), dải số liệu và khối liên hệ dùng `backdrop-filter`; các card khác là nền trắng 80% không blur. `components/QualityGuard.tsx` đo FPS thật khi vào trang và khi cuộn; máy nào không giữ được
+khoảng 45fps thì các phần glass tự chuyển sang nền trắng 85% không blur. Thử tay bằng `?quality=low` hoặc `?quality=high` trên URL.
 
 ## Công nghệ và SEO
 

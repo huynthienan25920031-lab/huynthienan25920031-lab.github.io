@@ -1,7 +1,6 @@
 import { TrendingUp } from 'lucide-react';
 import type { Project } from '@/data/projects';
 import ProjectFrame from './ProjectFrame';
-import TiltCard from './TiltCard';
 
 function Stack({ items }: { items: string[] }) {
   return (
@@ -32,17 +31,17 @@ function MockupNote({ show }: { show: boolean }) {
   ) : null;
 }
 
-type Props = { project: Project; hasImage: boolean; index: number };
+type Props = { project: Project; hasImage: boolean; src: string; index: number };
 
-export default function ProjectCard({ project, hasImage, index }: Props) {
+export default function ProjectCard({ project, hasImage, src, index }: Props) {
   const { title, description, stack, result, size, isMockup } = project;
-  const frame = { project, hasImage, index };
+  const frame = { project, hasImage, src, index };
   const note = <MockupNote show={isMockup && hasImage} />;
 
   if (size === 'featured') {
     return (
       <div className="md:col-span-2 lg:col-span-4 lg:row-span-2">
-        <TiltCard className="card-feature card-glow h-full">
+        <div className="card-feature card-hover h-full">
           <article className="flex h-full flex-col p-5 sm:p-7">
             <ProjectFrame {...frame} sizes="(min-width: 1024px) 680px, 90vw" className="shadow-card" />
             {note}
@@ -58,7 +57,7 @@ export default function ProjectCard({ project, hasImage, index }: Props) {
               </div>
             </div>
           </article>
-        </TiltCard>
+        </div>
       </div>
     );
   }
@@ -66,7 +65,7 @@ export default function ProjectCard({ project, hasImage, index }: Props) {
   if (size === 'small') {
     return (
       <div className="lg:col-span-2">
-        <TiltCard className="card h-full">
+        <div className="card card-hover h-full">
           <article className="flex h-full flex-col justify-center p-5">
             <div className="flex items-center gap-4">
               <div className="min-w-0 flex-1">
@@ -77,7 +76,7 @@ export default function ProjectCard({ project, hasImage, index }: Props) {
             </div>
             {note}
           </article>
-        </TiltCard>
+        </div>
       </div>
     );
   }
@@ -86,7 +85,7 @@ export default function ProjectCard({ project, hasImage, index }: Props) {
 
   return (
     <div className={tall ? 'md:row-span-2 lg:col-span-2 lg:row-span-2' : 'lg:col-span-2'}>
-      <TiltCard className="card h-full">
+      <div className="card card-hover h-full">
         <article className="flex h-full flex-col p-5 sm:p-6">
           <ProjectFrame {...frame} sizes="(min-width: 1024px) 340px, (min-width: 768px) 45vw, 90vw" />
           {note}
@@ -99,7 +98,7 @@ export default function ProjectCard({ project, hasImage, index }: Props) {
             </div>
           )}
         </article>
-      </TiltCard>
+      </div>
     </div>
   );
 }

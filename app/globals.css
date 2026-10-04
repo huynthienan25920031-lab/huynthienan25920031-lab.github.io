@@ -50,30 +50,25 @@ body {
   background-image: linear-gradient(90deg, #38bdf8, #8b5cf6);
 }
 
-/* ── Card dạng glass ───────────────────────────────────── */
+/* ── Card ──────────────────────────────────────────────── */
+/* Card thường: nền trắng 80%, không blur, viền mảnh, bóng mềm */
 .card,
 .card-feature {
   position: relative;
-  -webkit-backdrop-filter: blur(16px) saturate(160%);
-  backdrop-filter: blur(16px) saturate(160%);
 }
 
 .card {
-  background: rgba(255, 255, 255, 0.62);
-  border: 1px solid rgba(255, 255, 255, 0.7);
+  background: rgba(255, 255, 255, 0.8);
+  border: 1px solid rgba(20, 19, 26, 0.07);
   border-radius: 1.25rem;
-  box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.95),
-    var(--shadow-card);
+  box-shadow: var(--shadow-card);
 }
 
-/* Card nổi bật: đục hơn một chút, bóng sâu hơn, viền gradient cyan → tím */
+/* Card nổi bật: bóng sâu hơn, viền gradient cyan → tím */
 .card-feature {
-  background: rgba(255, 255, 255, 0.66);
+  background: rgba(255, 255, 255, 0.84);
   border-radius: 1.75rem;
-  box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.95),
-    var(--shadow-feature);
+  box-shadow: var(--shadow-feature);
 }
 
 .card-feature::before {
@@ -91,12 +86,34 @@ body {
     linear-gradient(#000 0 0) content-box,
     linear-gradient(#000 0 0);
   mask-composite: exclude;
+  opacity: 0.8;
+  transition: opacity 0.2s ease;
   pointer-events: none;
 }
 
-/* Vệt sáng mảnh ở cạnh trên */
-.card::after,
-.card-feature::after {
+/* Glass thật (backdrop-filter) chỉ dùng cho dải số liệu và khối liên hệ; navbar tự bật khi đã cuộn */
+.glass {
+  -webkit-backdrop-filter: blur(16px) saturate(160%);
+  backdrop-filter: blur(16px) saturate(160%);
+}
+
+.card.glass {
+  background: rgba(255, 255, 255, 0.62);
+  border-color: rgba(255, 255, 255, 0.7);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.95),
+    var(--shadow-card);
+}
+
+.card-feature.glass {
+  background: rgba(255, 255, 255, 0.66);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.95),
+    var(--shadow-feature);
+}
+
+/* Vệt sáng mảnh ở cạnh trên của card glass */
+.glass::after {
   content: '';
   position: absolute;
   top: 0;
@@ -107,74 +124,38 @@ body {
   pointer-events: none;
 }
 
-/* Thẻ nổi trên ảnh chân dung: nền đục, không blur, vì nó nằm trên canvas hạt đang chạy */
-.glass-chip {
-  background: rgba(255, 255, 255, 0.88);
-  border: 1px solid rgba(255, 255, 255, 0.9);
-  box-shadow:
-    inset 0 1px 0 #fff,
-    0 10px 26px -8px rgba(91, 60, 196, 0.35);
-}
-
 /* Chế độ tự hạ chất lượng (QualityGuard): bỏ blur, nền trắng 85% */
-html[data-quality='low'] .card,
-html[data-quality='low'] .card-feature {
+html[data-quality='low'] .glass {
   -webkit-backdrop-filter: none;
   backdrop-filter: none;
   background: rgba(255, 255, 255, 0.85);
 }
 
-/* Quầng sáng cực quang quanh card sản phẩm chủ lực */
-.card-glow {
-  box-shadow:
-    var(--shadow-feature),
-    -30px 0 80px -30px rgba(103, 232, 249, 0.6),
-    30px 10px 90px -30px rgba(167, 139, 250, 0.55);
+/* Hover: chỉ đậm viền lên một chút và nhích lên 2px */
+.card-hover {
+  transition:
+    transform 0.2s ease,
+    border-color 0.2s ease;
 }
 
-/* ── Spotlight + tilt 3D (chỉ khi có chuột) ───────────── */
-.tilt {
-  position: relative;
-  overflow: hidden;
-}
-
-/* nội dung nằm trên vệt sáng; .tilt-float là phần tử nổi tự định vị (absolute) */
-.tilt > :not(.tilt-spot):not(.tilt-float) {
-  position: relative;
-}
-
-.tilt-spot {
-  position: absolute;
-  left: -210px;
-  top: -210px;
-  width: 420px;
-  height: 420px;
-  border-radius: 50%;
-  background: radial-gradient(closest-side, rgba(139, 92, 246, 0.16), rgba(56, 189, 248, 0.07) 55%, transparent);
-  transform: translate3d(var(--mx, -400px), var(--my, -400px), 0);
-  opacity: 0;
-  transition: opacity 0.3s;
-  pointer-events: none;
-}
-
-.tilt-open {
-  overflow: visible;
-}
-
-/* vệt sáng trắng dùng trên ảnh */
-.tilt-spot-light {
-  background: radial-gradient(closest-side, rgba(255, 255, 255, 0.38), rgba(255, 255, 255, 0.1) 55%, transparent);
-}
-
-@media (hover: hover) and (pointer: fine) {
-  .tilt {
-    transform: perspective(900px) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg));
-    transition: transform 0.18s ease-out;
+@media (hover: hover) {
+  .card-hover:hover {
+    transform: translateY(-2px);
+    border-color: rgba(20, 19, 26, 0.18);
   }
 
-  .tilt:hover .tilt-spot {
+  .card-feature.card-hover:hover::before {
     opacity: 1;
   }
+}
+
+/* Thẻ nổi trên ảnh chân dung: nền đục, không blur */
+.glass-chip {
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid rgba(255, 255, 255, 0.9);
+  box-shadow:
+    inset 0 1px 0 #fff,
+    0 8px 20px -8px rgba(20, 19, 26, 0.3);
 }
 
 /* ── Hero: một chuỗi fade + rise duy nhất ─────────────── */
@@ -193,14 +174,12 @@ html[data-quality='low'] .card-feature {
   animation: rise 0.8s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
-/* Khung chân dung: viền gradient mảnh cyan → tím → hồng, bóng màu nhẹ */
+/* Khung chân dung: viền gradient mảnh cyan → tím → hồng, bóng nhỏ (không quầng sáng) */
 .portrait-frame {
   padding: 1.5px;
   border-radius: 28px;
   background: linear-gradient(140deg, #67e8f9, #a78bfa 50%, #f9a8d4);
-  box-shadow:
-    0 34px 70px -22px rgba(139, 92, 246, 0.5),
-    0 12px 32px -12px rgba(56, 189, 248, 0.4);
+  box-shadow: 0 14px 30px -18px rgba(20, 19, 26, 0.35);
 }
 
 @keyframes live-dot {
@@ -229,10 +208,10 @@ html[data-quality='low'] .card-feature {
 
 @keyframes ribbon-sway {
   from {
-    transform: translateY(-5%) scaleY(0.82) skewX(-5deg);
+    transform: translate3d(0, -7%, 0) rotate(-1.6deg);
   }
   to {
-    transform: translateY(5%) scaleY(1.22) skewX(5deg);
+    transform: translate3d(0, 7%, 0) rotate(1.6deg);
   }
 }
 
@@ -330,13 +309,13 @@ html[data-quality='low'] .card-feature {
 .aurora-tint {
   position: absolute;
   inset: 0;
-  will-change: opacity;
 }
 
 /* Vệt loang của lớp nền cố định đứng yên (chỉ trôi theo cuộn/chuột): nếu chúng chuyển động
    liên tục thì mọi card glass phía trên phải blur lại mỗi frame. */
 .aurora-tint .aurora-ribbon {
   animation: none;
+  will-change: auto;
 }
 
 /* ── Timeline ─────────────────────────────────────────── */
@@ -421,8 +400,10 @@ a:focus-visible .logo-chevron {
     animation: none;
   }
 
-  .tilt {
+  .card-hover,
+  .card-hover:hover {
     transform: none;
+    transition: none;
   }
 
   .marquee {

@@ -46,7 +46,7 @@ export const projects: Project[] = [
     isMockup: false, // ảnh chụp thật, chạy local với dữ liệu mẫu
     frame: 'browser',
     description:
-      'Ghi chú và lập kế hoạch có AI đi cùng: chat AI, nhập bằng giọng nói, theo dõi task 30 ngày, đồng bộ đa nền tảng (PWA).',
+      'Lập lịch làm việc thông minh có AI đi cùng: lịch tuần, theo dõi khối lượng giờ làm, AI Assistant gợi ý và sắp xếp lịch, đồng bộ đa nền tảng (PWA).',
     stack: ['Next.js', 'React', 'Supabase', 'AI', 'PWA'],
   },
   {

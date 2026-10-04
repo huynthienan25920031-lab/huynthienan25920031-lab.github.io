@@ -1,10 +1,10 @@
 import { ArrowDown, Mail, MessageCircle, Phone } from 'lucide-react';
-import AntigravityField from '@/components/AntigravityField';
 import Aurora from '@/components/Aurora';
 import AuroraBackdrop from '@/components/AuroraBackdrop';
 import AuroraRibbon from '@/components/AuroraRibbon';
 import HeroPortrait from '@/components/HeroPortrait';
 import Navbar from '@/components/Navbar';
+import ParticleLogo from '@/components/ParticleLogo';
 import ProjectCard from '@/components/ProjectCard';
 import QualityGuard from '@/components/QualityGuard';
 import Radar from '@/components/Radar';
@@ -15,7 +15,7 @@ import { timeline } from '@/data/experience';
 import { projects } from '@/data/projects';
 import { site, stats } from '@/data/site';
 import { allTech, radarAxes, skillGroups } from '@/data/skills';
-import { publicFileExists } from '@/lib/assets';
+import { publicFileExists, versionedSrc } from '@/lib/assets';
 
 const container = 'mx-auto w-full max-w-6xl px-5 sm:px-8';
 const buttonBase =
@@ -43,20 +43,22 @@ export default function Home() {
           className="relative isolate flex min-h-[90vh] items-center overflow-hidden"
         >
           <AuroraRibbon />
-          <AntigravityField className="absolute inset-0 -z-10 h-full w-full" />
           <div
-            className={`${container} grid items-center gap-10 pb-24 pt-12 md:grid-cols-[minmax(0,1fr)_auto] md:gap-12 md:py-24 lg:gap-16`}
+            className={`${container} grid items-center gap-10 pb-20 pt-28 md:grid-cols-[minmax(0,1fr)_auto] md:gap-12 md:py-24 lg:gap-16`}
           >
-            <div className="rise ml-3 md:order-2 md:ml-0" style={rise(2)}>
-              <HeroPortrait
-                src={site.avatar}
-                alt={`Chân dung ${site.fullName}`}
-                hasImage={publicFileExists(site.avatar)}
-                badge={site.role}
-                className="w-44 md:w-64 lg:w-[380px]"
-              />
+            {/* Chữ A hạt nằm sau khung ảnh, cao 1.4 lần khung, lệch lên trên (và sang trái ở desktop) */}
+            <div className="relative mx-auto w-[200px] md:order-2 md:mx-0 md:w-[240px] lg:w-[280px] min-[1600px]:w-[360px]">
+              <ParticleLogo className="pointer-events-none absolute left-[-47.5%] top-[-36%] -z-10 h-[160%] w-[195%] md:left-[-56%]" />
+              <div className="rise" style={rise(2)}>
+                <HeroPortrait
+                  src={versionedSrc(site.avatar)}
+                  alt={`Chân dung ${site.fullName}`}
+                  hasImage={publicFileExists(site.avatar)}
+                  badge={site.role}
+                />
+              </div>
             </div>
-            <div data-particle-quiet="">
+            <div data-particle-quiet="" className="w-fit max-w-full">
               <p
                 className="rise inline-flex items-center gap-2 rounded-full border border-hairline bg-white/85 px-3 py-1.5 text-[13px] text-sub"
                 style={rise(0)}
@@ -87,7 +89,7 @@ export default function Home() {
         </section>
 
         <section aria-label="Số liệu nổi bật" className={`${container} pt-6`}>
-          <dl className="card grid grid-cols-2 overflow-hidden md:grid-cols-4">
+          <dl className="card glass grid grid-cols-2 overflow-hidden md:grid-cols-4">
             {stats.map((stat, i) => (
               <div
                 key={stat.label}
@@ -132,6 +134,7 @@ export default function Home() {
                 project={project}
                 index={i}
                 hasImage={publicFileExists(project.image)}
+                src={versionedSrc(project.image)}
               />
             ))}
           </div>
@@ -143,7 +146,7 @@ export default function Home() {
         </section>
 
         <section id="lien-he" data-aurora="0.9" className={`${container} pb-20 pt-10 sm:pb-28`}>
-          <div className="card-feature relative isolate overflow-hidden px-4 py-16 text-center sm:px-12 sm:py-24">
+          <div className="card-feature glass relative isolate overflow-hidden px-4 py-16 text-center sm:px-12 sm:py-24">
             <Aurora className="absolute inset-0 -z-10" />
             <h2 className="font-display mx-auto max-w-3xl text-balance text-3xl font-semibold sm:text-5xl">
               Có quy trình nào đang tốn giờ làm tay?

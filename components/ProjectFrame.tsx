@@ -14,6 +14,8 @@ type Props = {
   project: Project;
   /** File ảnh đã có trong public/ chưa (kiểm tra lúc build). */
   hasImage: boolean;
+  /** Đường dẫn ảnh kèm mã phiên bản (lib/assets.ts). */
+  src: string;
   index: number;
   sizes: string;
   className?: string;
@@ -21,13 +23,13 @@ type Props = {
 };
 
 /** Khung ảnh sản phẩm: cửa sổ trình duyệt 16:10 hoặc điện thoại 9:19.5. */
-export default function ProjectFrame({ project, hasImage, index, sizes, className = '', compact = false }: Props) {
+export default function ProjectFrame({ project, hasImage, src, index, sizes, className = '', compact = false }: Props) {
   const [from, to] = tones[index % tones.length];
   const phone = project.frame === 'phone';
 
   const screen = hasImage ? (
     <Image
-      src={project.image}
+      src={src}
       alt={`${project.isMockup ? 'Giao diện minh họa' : 'Ảnh màn hình'} ${project.title}`}
       fill
       unoptimized

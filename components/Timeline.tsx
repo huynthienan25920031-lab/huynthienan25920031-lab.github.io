@@ -15,7 +15,7 @@ export default function Timeline({ items }: { items: TimelineItem[] }) {
               aria-hidden="true"
               className="timeline-dot absolute -left-7 top-7 h-3 w-3 rounded-full sm:-left-9"
             />
-            <div className="card p-5 sm:p-6">
+            <div className="card card-hover p-5 sm:p-6">
               <p data-period="" className="font-mono text-sm text-sub">
                 {item.period}
               </p>

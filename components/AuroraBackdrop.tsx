@@ -85,7 +85,10 @@ export default function AuroraBackdrop() {
       }
       // lớp màu thứ hai của dải chính hiện dần khi cuộn (đổi hue)
       const fade = Math.min(1, sy / (window.innerHeight * 0.6)).toFixed(3);
-      for (const el of fades) el.style.opacity = fade;
+      for (const el of fades) {
+        el.style.opacity = fade;
+        el.style.visibility = Number(fade) > 0.01 ? 'visible' : 'hidden';
+      }
     };
 
     const frame = () => {
